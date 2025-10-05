@@ -20,7 +20,6 @@ import pages.BikesPage;
 import pages.CalculatorPage;
 import pages.CalendarPage;
 import pages.DashboardPage;
-import pages.EquipmentPage;
 import pages.LoginPage;
 import pages.LogoutPage;
 import pages.ReportPage;
@@ -36,25 +35,29 @@ public class BaseTest {
     protected static final String BASE_LOGIN = PropertyReader.getProperty("login");
     protected static final String BASE_PASSWORD = PropertyReader.getProperty("password");
     protected String BASE_URL = PropertyReader.getProperty("url");
-    protected LoginPage loginPage;
-    protected CalendarPage calendarPage;
-    protected AddWorkoutPage addWorkoutPage;
-    protected DashboardPage dashboardPage;
-    protected WorkoutDetailsPage workoutDetailsPage;
-    protected ReportPage reportPage;
-    protected CalculatorPage calculatorPage;
-    protected LogoutPage logoutPage;
-    protected EquipmentPage equipmentPage;
-    protected ShoesPage shoesPage;
-    protected BikesPage bikesPage;
+
+    // Инициализируем страницы сразу, чтобы избежать NullPointerException
+    protected LoginPage loginPage = new LoginPage();
+    protected CalendarPage calendarPage = new CalendarPage();
+    protected AddWorkoutPage addWorkoutPage = new AddWorkoutPage();
+    protected DashboardPage dashboardPage = new DashboardPage();
+    protected WorkoutDetailsPage workoutDetailsPage = new WorkoutDetailsPage();
+    protected ReportPage reportPage = new ReportPage();
+    protected CalculatorPage calculatorPage = new CalculatorPage();
+    protected LogoutPage logoutPage = new LogoutPage();
+    protected ShoesPage shoesPage = new ShoesPage();
+    protected BikesPage bikesPage = new BikesPage();
 
     @BeforeClass(alwaysRun = true)
     @Parameters({"browserName"})
     public void setUp(@Optional("chrome") String browser, ITestContext testContext) {
+        // Сначала проверяем, что свойства загружены корректно
+        validateProperties();
+
         Configuration.baseUrl = BASE_URL;
         Configuration.browserSize = "1920x1080";
         Configuration.browser = browser;
-        Configuration.headless = Boolean.parseBoolean(PropertyReader.getProperty("headless"));
+ //       Configuration.headless = Boolean.parseBoolean(PropertyReader.getProperty("headless", "false"));
         Configuration.timeout = 10000;
         Configuration.fileDownload = FileDownloadMode.FOLDER;
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
@@ -62,61 +65,49 @@ public class BaseTest {
 
     @BeforeMethod(alwaysRun = true)
     public void preCondition() {
-        // Инициализируем страницы ПЕРЕД использованием
-        initializePages();
-
-        open("/");
-        loginPage.login(BASE_LOGIN, BASE_PASSWORD);
+        try {
+            open("/");
+            // Явно переинициализируем loginPage на случай параллельного выполнения
+            this.loginPage = new LoginPage();
+            loginPage.login(BASE_LOGIN, BASE_PASSWORD);
+        } catch (Exception e) {
+            System.err.println("Error in preCondition: " + e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException("Failed to execute preCondition", e);
+        }
     }
 
     @AfterMethod(alwaysRun = true)
     public void cleanup(ITestResult result) {
         try {
-            // Выполняем очистку только если браузер еще открыт
-            if (!isWebDriverClosed()) {
+            if (isWebDriverActive()) {
                 performGroupSpecificCleanup(result);
             }
         } catch (Exception e) {
             System.err.println("Error during cleanup: " + e.getMessage());
         } finally {
-            // Всегда закрываем браузер в конце
-            if (!isWebDriverClosed()) {
+            if (isWebDriverActive()) {
                 closeWebDriver();
             }
         }
-    }
-
-    private void initializePages() {
-        this.loginPage = new LoginPage();
-        this.calendarPage = new CalendarPage();
-        this.addWorkoutPage = new AddWorkoutPage();
-        this.dashboardPage = new DashboardPage();
-        this.workoutDetailsPage = new WorkoutDetailsPage();
-        this.reportPage = new ReportPage();
-        this.calculatorPage = new CalculatorPage();
-        this.logoutPage = new LogoutPage();
-        this.equipmentPage = new EquipmentPage();
-        this.shoesPage = new ShoesPage();
-        this.bikesPage = new BikesPage();
     }
 
     private void performGroupSpecificCleanup(ITestResult result) {
         String[] groups = result.getMethod().getGroups();
 
         try {
-            if (Arrays.asList(groups).contains("shoesDelete")) {
+            if (Arrays.asList(groups).contains("shoesDelete") && shoesPage != null) {
                 shoesPage.deleteShoesWithConfirmation();
             }
-            if (Arrays.asList(groups).contains("workoutDelete")) {
+            if (Arrays.asList(groups).contains("workoutDelete") && workoutDetailsPage != null && addWorkoutPage != null) {
                 workoutDetailsPage.clickWorkoutActionsDropdown();
                 addWorkoutPage.deleteWorkout();
             }
-            if (Arrays.asList(groups).contains("workoutDeleteToday")) {
+            if (Arrays.asList(groups).contains("workoutDeleteToday") && calendarPage != null) {
                 calendarPage.deleteTodayWorkout();
             }
         } catch (Exception e) {
             System.err.println("Error in group-specific cleanup: " + e.getMessage());
-            // Продолжаем выполнение, даже если одна из операций очистки не удалась
         }
     }
 
@@ -124,13 +115,27 @@ public class BaseTest {
         return Arrays.asList(result.getMethod().getGroups()).contains(group);
     }
 
-    private boolean isWebDriverClosed() {
+    private boolean isWebDriverActive() {
         try {
-            // Попробуем получить текущий URL чтобы проверить, открыт ли еще браузер
-            com.codeborne.selenide.WebDriverRunner.getWebDriver();
-            return false;
+            return com.codeborne.selenide.WebDriverRunner.hasWebDriverStarted();
         } catch (Exception e) {
-            return true;
+            return false;
         }
+    }
+
+    private void validateProperties() {
+        if (BASE_LOGIN == null || BASE_LOGIN.isEmpty()) {
+            throw new RuntimeException("Property 'login' is not set or empty");
+        }
+        if (BASE_PASSWORD == null || BASE_PASSWORD.isEmpty()) {
+            throw new RuntimeException("Property 'password' is not set or empty");
+        }
+        if (BASE_URL == null || BASE_URL.isEmpty()) {
+            throw new RuntimeException("Property 'url' is not set or empty");
+        }
+        System.out.println("Properties loaded successfully:");
+        System.out.println("URL: " + BASE_URL);
+        System.out.println("Login: " + BASE_LOGIN);
+      //  System.out.println("Headless: " + PropertyReader.getProperty("headless", "false"));
     }
 }
