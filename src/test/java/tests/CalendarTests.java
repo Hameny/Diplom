@@ -55,7 +55,7 @@ public class CalendarTests extends BaseTest {
     deleteTodayWorkout();
   }
 
-  @Test(groups = {"regression","smoke"})
+  @Test(groups = {"regression"})
   public void editWorkout() {
     AddWorkout quickWorkout = AddWorkout.builder()
         .activityType("Swim")
