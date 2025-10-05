@@ -22,7 +22,7 @@ on:
       suite:
         description: 'Test suite to run'
         required: true
-        default: 'allTests'
+        default: 'smoke'
         type: choice
         options:
           - smoke
