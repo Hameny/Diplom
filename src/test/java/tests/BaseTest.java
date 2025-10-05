@@ -7,7 +7,9 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.FileDownloadMode;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.assertj.core.util.Arrays;
 import org.testng.ITestContext;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -72,23 +74,33 @@ public class BaseTest {
     @BeforeMethod(alwaysRun = true)
     public void preCondition() {
         open("/");
+        // Инициализация страниц при необходимости
+        this.loginPage = new LoginPage();
         loginPage.login(BASE_LOGIN, BASE_PASSWORD);
     }
 
-    @AfterMethod(onlyForGroups = "shoesDelete", alwaysRun = true)
-    public void deleteShoes() {
-        shoesPage.deleteShoesWithConfirmation();
+    @AfterMethod(alwaysRun = true)
+    public void cleanup(ITestResult result) {
+        try {
+            // Определяем порядок очистки явно
+            if (isTestInGroup(result, "shoesDelete")) {
+                shoesPage.deleteShoesWithConfirmation();
+            }
+            if (isTestInGroup(result, "workoutDelete")) {
+                workoutDetailsPage.clickWorkoutActionsDropdown();
+                addWorkoutPage.deleteWorkout();
+            }
+            if (isTestInGroup(result, "workoutDeleteToday")) {
+                calendarPage.deleteTodayWorkout();
+            }
+        } finally {
+            // Всегда закрываем браузер в конце
+            closeWebDriver();
+        }
     }
 
-    @AfterMethod(onlyForGroups = "workoutDelete", alwaysRun = true)
-    public void deleteWorkout() {
-        workoutDetailsPage.clickWorkoutActionsDropdown();
-        addWorkoutPage.deleteWorkout();
-    }
-
-    @AfterMethod(onlyForGroups = "workoutDeleteToday", alwaysRun = true)
-    public void deleteTodayWorkout() {
-        calendarPage.deleteTodayWorkout();
+    private boolean isTestInGroup(ITestResult result, String group) {
+        return Arrays.asList(result.getMethod().getGroups()).contains(group);
     }
 
     @AfterMethod(alwaysRun = true)
