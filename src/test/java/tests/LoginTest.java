@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
 
-  @Test(groups = {"LoginWithSuccessLogin", "regression", "smoke"})
+  @Test(groups = {"regression", "smoke"})
   public void positiveLoginTest() {
     dashboardPage.isOpen();
   }

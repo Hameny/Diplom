@@ -8,7 +8,7 @@ public class LogoutTest extends BaseTest {
 
   private static final String LOGOUT_MESSAGE = "You have been successfully logged out of the system.";
 
-  @Test(groups = {"smoke", "regression", "LoginWithSuccessLogin"})
+  @Test(groups = {"smoke", "regression"})
   public void positiveLogoutTest() {
     calendarPage.isOpen();
     dashboardPage.clickLogoutButton();

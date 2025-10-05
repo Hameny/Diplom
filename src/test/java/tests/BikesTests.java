@@ -10,7 +10,7 @@ public class BikesTests extends BaseTest {
   private static final String ERROR = "This field is required.";
 
   @Test(description = "Проверка добавления велосипеда",
-      groups = {"regression", "smoke", "LoginWithSuccessLogin"})
+      groups = {"regression", "smoke"})
   public void positiveAddBikeTest() {
     AddBikes quickAddBike = AddBikes.builder()
         .bikeName("Bike for ride")
@@ -27,7 +27,7 @@ public class BikesTests extends BaseTest {
     shoesPage.clickEditShoesButton();
   }
 
-  @Test(groups = {"regression", "smoke", "LoginWithSuccessLogin"})
+  @Test(groups = {"regression", "smoke"})
   public void negativeAddBikesTest() {
     calendarPage.isOpen();
     bikesPage.navigateToBikesPage()
