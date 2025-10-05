@@ -38,21 +38,6 @@ public class CalendarTests extends BaseTest {
         "Сообщение об ошибке не совпадает с ожидаемым");
   }
 
-//  @Test(groups = {"LoginWithSuccessLogin", "regression", "smoke", "workoutDeleteToday"})
-//  public void addFullFromCalendar() {
-//    AddWorkout fullWorkout = AddWorkout.builder()
-//        .name("morning run")
-//        .build();
-//    dashboardPage.clickCalendarMenu();
-//    calendarPage.isOpen()
-//        .clickFullWorkoutFromCalendar();
-//    addWorkoutPage.selectActivityType("run", "Long Run");
-//    addWorkoutPage.addWorkoutName(fullWorkout)
-//        .clickSaveWorkoutButton();
-//    assertEquals(addWorkoutPage.getWorkoutNameText(), fullWorkout.getName(),"Наименование не совпадает с ожидаемым");
-//    dashboardPage.clickCalendarMenu();
-//  }
-
   @Test(groups = {"regression", "smoke"})
   public void addFullFromCalendar() {
     AddWorkout fullWorkout = AddWorkout.builder()
