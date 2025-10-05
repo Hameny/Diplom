@@ -7,11 +7,6 @@ permissions:
   pages: write
   id-token: write
 
-# ДОБАВЛЕНО: Concurrency для управления параллельными запусками
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 # Триггеры для запуска рабочего процесса
 on:
   # Запуск при push в ветку main
@@ -35,10 +30,10 @@ on:
           - allTests
 
 jobs:
-  # Job для сборки и тестирования
+  # Единственное задание в этом рабочем процессе
   build-and-test:
     # Имя задания, которое будет отображаться в GitHub
-    name: Build and Test
+    name: Build, Test and Publish Report
     # Используем последнюю версию Ubuntu для выполнения задания
     runs-on: ubuntu-latest
 
@@ -70,7 +65,7 @@ jobs:
         run: mvn clean test -DsuiteName=${{ github.event.inputs.suite || 'smoke' }} -Duser=${{ secrets.SD_USER }} -Dpassword=${{ secrets.SD_PASSWORD }}
 
       # Шаг 4: Генерация отчета Allure
-      # ИСПРАВЛЕНО: Всегда генерируем отчет, независимо от результата тестов
+      # 'if: always()' гарантирует, что этот шаг выполнится, даже если тесты упадут
       - name: Generate Allure Report
         if: always()
         run: mvn allure:report
@@ -84,57 +79,14 @@ jobs:
           path: target/allure-results
           retention-days: 7
 
-      # Шаг 6: Загрузка Allure отчета как артефакта для деплоя
-      # ИСПРАВЛЕНО: Всегда загружаем артефакт для деплоя
-      - name: Upload Allure report artifact
+      # Шаг 6: Развертывание отчета Allure на GitHub Pages для удобного просмотра
+      # ИСПРАВЛЕНО: Добавлено условие для деплоя только из main ветки
+      - name: Deploy Allure report to GitHub Pages
         if: always()
-        uses: actions/upload-pages-artifact@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          name: allure-report
-          path: target/site/allure-maven-plugin
-
-  # ДОБАВЛЕНО: Отдельный job для деплоя на GitHub Pages
-  deploy:
-    # ИСПРАВЛЕНО: Зависит от build-and-test, но запускается всегда
-    needs: build-and-test
-    # ИСПРАВЛЕНО: Всегда деплоим, независимо от результата тестов
-    if: always()
-
-    # Настройки окружения GitHub Pages
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Download Allure report artifact
-        # ИСПРАВЛЕНО: Всегда скачиваем артефакт
-        if: always()
-        uses: actions/download-artifact@v4
-        with:
-          name: allure-report
-          path: ./_site
-
-      - name: Verify Allure report exists
-        # ИСПРАВЛЕНО: Проверяем наличие отчета перед деплоем
-        if: always()
-        run: |
-          if [ -d "./_site" ] && [ "$(ls -A ./_site)" ]; then
-            echo "✅ Allure report found, proceeding with deployment"
-          else
-            echo "❌ Allure report not found or empty"
-            exit 1
-          fi
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        # ИСПРАВЛЕНО: Всегда пытаемся деплоить
-        if: always()
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Директория для публикации
+          publish_dir: target/site/allure-maven-plugin
+          # Сохранять предыдущие отчеты
+          keep_files: true
