@@ -93,7 +93,7 @@ public class BaseTest {
 
   //@AfterMethod(onlyForGroups = "workoutDeleteToday", alwaysRun = true)
   public void deleteTodayWorkout() {
-    calendarPage.deleteTodayWorkout();
+    calendarPage.deleteAllWorkoutsOnCurrentDate();
   }
 
   @AfterMethod(alwaysRun = true)

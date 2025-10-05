@@ -164,7 +164,7 @@ public class CalendarTests extends BaseTest {
     workoutDetailsPage.isOpen();
     String downloadedFileName = calendarPage.downloadWorkoutFile();
     assertTrue(downloadedFileName.endsWith(".tcx"),
-        "Имя файла должно начинаться с '.tcx', но было: " + downloadedFileName);
-    deleteWorkout();
+        "Имя файла должно заканчиваться с '.tcx', но было: " + downloadedFileName);
+    deleteTodayWorkout();
   }
 }

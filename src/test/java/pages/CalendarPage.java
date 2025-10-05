@@ -4,6 +4,8 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.switchTo;
 
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import java.io.File;
 import java.time.LocalDate;
@@ -32,10 +34,12 @@ public class CalendarPage{
   private static final By FULL_VIEW_LINK_LOCATOR = By.cssSelector("a.full-view");
   private static final By DOWNLOAD_BUTTON_LOCATOR = By.cssSelector(
       "button[onclick*='Delivery/WorkoutSourceFile.cshtml']");
-  private static final By MODAL_FOOTER_LOCATOR = By.cssSelector(".modal-footer");
-  private static final By DELETE_CONFIRM_BUTTON_LOCATOR = By.cssSelector("a:nth-of-type(1)");
-  private static final String WORKOUT_UPLOAD_IFRAME_SELECTOR = "#WorkoutUploadiFrame";
+  private static final String WORKOUT_BY_KEY_TEMPLATE = ".calendarworkout[data-wkey='%s']";  private static final String WORKOUT_UPLOAD_IFRAME_SELECTOR = "#WorkoutUploadiFrame";
   private static final By FILE_INPUT_LOCATOR = By.cssSelector("input[type='file']");
+  private static final By WORKOUT_EVENTS_LOCATOR = By.cssSelector(".calendarworkout[data-wkey]");
+  private static final By WORKOUT_TITLE_LOCATOR = By.cssSelector(".fc-event-activity-title");
+  private static final By QUICK_DELETE_BUTTON_LOCATOR = By.cssSelector("a.quick-delete");
+  private static final By MODAL_CONFIRM_BUTTON_LOCATOR = By.cssSelector(".modal-footer a:nth-of-type(1)");
 
   @Step("Page is open")
   public CalendarPage isOpen() {
@@ -66,14 +70,63 @@ public class CalendarPage{
     return this;
   }
 
-  @Step("Удалить сегодняшнюю тренировку")
-  public CalendarPage deleteTodayWorkout() {
-    log.info("Удалить сегодняшнюю тренировку");
-    $(TODAY_DAY_LOCATOR).$(DAY_CONTENT_LOCATOR).$(EVENT_ACTIVITY_TITLE_LOCATOR).click();
-    $(TODAY_DAY_LOCATOR).$(QUICK_DELETE_LINK_LOCATOR).click();
-    $(MODAL_FOOTER_LOCATOR).$(DELETE_CONFIRM_BUTTON_LOCATOR).click();
-    $(TODAY_DAY_LOCATOR).$(DAY_CONTENT_LOCATOR).$(EVENT_ACTIVITY_TITLE_LOCATOR).shouldBe(disappear);
-    return this;
+  @Step("Найти и удалить все тренировки на текущую дату")
+  public void deleteAllWorkoutsOnCurrentDate() {
+    log.info("Поиск и удаление всех тренировок на текущую дату");
+    ElementsCollection workouts = getTodayWorkouts();
+    if (workouts.isEmpty()) {
+      log.info("На текущую дату нет тренировок для удаления");
+      return;
+    }
+    log.info("Найдено тренировок для удаления: {}", workouts.size());
+    while (hasWorkoutsToday()) {
+      deleteFirstWorkout();
+    }
+    log.info("Все тренировки на текущую дату успешно удалены");
+  }
+
+  @Step("Удалить первую тренировку")
+  private void deleteFirstWorkout() {
+    if (!hasWorkoutsToday()) {
+      log.info("Нет тренировок для удаления");
+      return;
+    }
+
+    SelenideElement firstWorkout = getTodayWorkouts().first();
+    String workoutName = firstWorkout.$(WORKOUT_TITLE_LOCATOR).shouldBe(visible).getText();
+    String workoutKey = firstWorkout.getAttribute("data-wkey");
+    log.info("Удаление тренировки: {} (key: {})", workoutName, workoutKey);
+    try {
+      firstWorkout.$(WORKOUT_TITLE_LOCATOR).click();
+      firstWorkout.$(QUICK_DELETE_BUTTON_LOCATOR)
+          .shouldBe(visible, enabled)
+          .click();
+      $(MODAL_CONFIRM_BUTTON_LOCATOR)
+          .shouldBe(visible, enabled)
+          .click();
+      waitForWorkoutToDisappear(workoutKey);
+      log.info("Тренировка '{}' успешно удалена", workoutName);
+    } catch (Exception e) {
+      log.error("Ошибка при удалении тренировки '{}': {}", workoutName, e.getMessage());
+    }
+  }
+
+  @Step("Дождаться исчезновения тренировки с key: {workoutKey}")
+  private void waitForWorkoutToDisappear(String workoutKey) {
+    String workoutLocator = String.format(WORKOUT_BY_KEY_TEMPLATE, workoutKey);
+    $(workoutLocator).should(disappear);
+  }
+
+  @Step("Проверить наличие тренировок на сегодня")
+  public boolean hasWorkoutsToday() {
+    return !getTodayWorkouts().isEmpty();
+  }
+
+  @Step("Получить список тренировок на сегодня")
+  public ElementsCollection getTodayWorkouts() {
+    return $(TODAY_DAY_LOCATOR)
+        .$$(WORKOUT_EVENTS_LOCATOR)
+        .filter(visible);
   }
 
   @Step("Нажать кнопку 'Сохранить тренировку'")
