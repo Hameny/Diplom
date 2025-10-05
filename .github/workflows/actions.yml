@@ -1,0 +1,83 @@
+# Имя рабочего процесса, которое будет отображаться в GitHub Actions
+name: CI Build and Test
+
+# Триггеры для запуска рабочего процесса
+on:
+  # Запуск при push в ветку main
+  push:
+    branches: [ "main" ]
+  # Запуск при pull request в ветку main
+  pull_request:
+    branches: [ "main" ]
+  # Позволяет запускать этот рабочий процесс вручную со страницы Actions
+  workflow_dispatch:
+    inputs:
+      # Входные данные для ручного запуска: выбор тестового набора
+      suite:
+        description: 'Test suite to run'
+        required: true
+        default: 'smoke'
+        type: choice
+        options:
+          - smoke
+          - regression
+          - allTests
+
+jobs:
+  # Единственное задание в этом рабочем процессе
+  build-and-test:
+    # Имя задания, которое будет отображаться в GitHub
+    name: Build, Test and Publish Report
+    # Используем последнюю версию Ubuntu для выполнения задания
+    runs-on: ubuntu-latest
+
+    # Переменные окружения, доступные для всех шагов в этом задании
+    env:
+      # Передача секретов для аутентификации в тестах
+      USER: ${{ secrets.SD_USER }}
+      PASSWORD: ${{ secrets.SD_PASSWORD }}
+
+    steps:
+      # Шаг 1: Клонирование репозитория
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Шаг 2: Настройка JDK 17
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          # Кэширование зависимостей Maven для ускорения сборок
+          cache: maven
+
+      # Шаг 3: Запуск тестов с использованием Maven
+      # Выбирается тестовый набор из ручного ввода или 'smoke' по умолчанию
+      - name: Run tests
+        run: mvn clean test -DsuiteName=${{ github.event.inputs.suite || 'smoke' }} -Duser=$USER -Dpassword=$PASSWORD
+
+      # Шаг 4: Генерация отчета Allure
+      # 'if: always()' гарантирует, что этот шаг выполнится, даже если тесты упадут
+      - name: Generate Allure Report
+        if: always()
+        run: mvn allure:report
+
+      # Шаг 5: Загрузка артефактов с результатами Allure
+      - name: Upload Allure results artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: target/allure-results
+          retention-days: 7
+
+      # Шаг 6: Развертывание отчета Allure на GitHub Pages для удобного просмотра
+      - name: Deploy Allure report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Директория для публикации
+          publish_dir: target/site/allure-maven-plugin
+          # Сохранять предыдущие отчеты
+          keep_files: true
