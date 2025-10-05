@@ -38,7 +38,7 @@ public class CalendarTests extends BaseTest {
         "Сообщение об ошибке не совпадает с ожидаемым");
   }
 
-  @Test(groups = {"regression", "smoke"})
+  @Test(groups = {"regression"})
   public void addFullFromCalendar() {
     AddWorkout fullWorkout = AddWorkout.builder()
         .name("morning run")
@@ -116,7 +116,7 @@ public class CalendarTests extends BaseTest {
     deleteWorkout();
   }
 
-  @Test(groups = {"regression", "smoke"})
+  @Test(groups = {"regression"})
   public void viewPastTrainingFromDashboardPage() {
     AddWorkout quickWorkout = AddWorkout.builder()
         .activityType("Walk")
@@ -154,7 +154,7 @@ public class CalendarTests extends BaseTest {
     deleteWorkout();
   }
 
-  @Test(groups = {"regression", "smoke"})
+  @Test(groups = {"regression"})
   public void fileDownloadTest() {
     preCondition();
     calendarPage.isOpen()
