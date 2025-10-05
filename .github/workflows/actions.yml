@@ -82,7 +82,7 @@ jobs:
       # Шаг 6: Развертывание отчета Allure на GitHub Pages для удобного просмотра
       # ИСПРАВЛЕНО: Добавлено условие для деплоя только из main ветки
       - name: Deploy Allure report to GitHub Pages
-        if: always() && github.ref == 'refs/heads/main'
+        if: always()
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
