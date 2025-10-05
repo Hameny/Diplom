@@ -12,8 +12,9 @@ public class ReportTests extends BaseTest {
   private static final String ERROR_MESSAGE =
       "×\n" + "Please fix the following errors:\n" + "*Please select a valid Activity Zone Type.";
 
-  @Test(groups = {"LoginWithSuccessLogin", "regression"})
+  @Test(groups = { "regression"})
   public void negativeViewZoneReport() {
+    preCondition();
     dashboardPage.clickWorkoutReportPage();
     reportPage.isOpen()
         .clickZoneReportLink()
@@ -24,11 +25,12 @@ public class ReportTests extends BaseTest {
         "Сообщение об ошибке не совпадает с ожидаемым");
   }
 
-  @Test(groups = {"LoginWithSuccessLogin", "regression", "smoke", "workoutDelete"})
+  @Test(groups = { "regression", "smoke", "workoutDelete"})
   public void positiveViewWorkoutReport() {
     AddWorkout quickWorkout = AddWorkout.builder()
         .activityType("Walk")
         .build();
+    preCondition();
     dashboardPage.clickCalendarMenu();
     calendarPage.isOpen()
         .clickQuickAddToggle()

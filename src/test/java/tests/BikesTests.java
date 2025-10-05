@@ -15,6 +15,7 @@ public class BikesTests extends BaseTest {
     AddBikes quickAddBike = AddBikes.builder()
         .bikeName("Bike for ride")
         .build();
+    preCondition();
     calendarPage.isOpen();
     bikesPage.navigateToBikesPage()
         .isOpen()
@@ -29,6 +30,7 @@ public class BikesTests extends BaseTest {
 
   @Test(groups = {"regression", "smoke"})
   public void negativeAddBikesTest() {
+    preCondition();
     calendarPage.isOpen();
     bikesPage.navigateToBikesPage()
         .isOpen()

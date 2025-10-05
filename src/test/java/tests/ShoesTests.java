@@ -9,11 +9,12 @@ public class ShoesTests extends BaseTest {
 
   private static final String SHOES_ERROR = "This field is required.";
 
-  @Test(groups = {"regression", "smoke", "LoginWithSuccessLogin", "shoesDelete"})
+  @Test(groups = {"regression", "smoke", "shoesDelete"})
   public void positiveAddShoesTest() {
     AddShoes quickAddshoes = AddShoes.builder()
         .shoeName("New running Adidas shoes")
         .build();
+    preCondition();
     calendarPage.isOpen();
     shoesPage.navigateToShoesPage()
         .isOpen()
@@ -26,11 +27,12 @@ public class ShoesTests extends BaseTest {
     shoesPage.clickEditShoesButton();
   }
 
-  @Test(groups = {"regression", "LoginWithSuccessLogin", "shoesDelete"})
+  @Test(groups = {"regression", "shoesDelete"})
   public void positiveEditShoesTest() {
     AddShoes quickAddshoes = AddShoes.builder()
         .shoeName("NEW ADIDAS")
         .build();
+    preCondition();
     calendarPage.isOpen();
     shoesPage.navigateToShoesPage()
         .isOpen()
@@ -58,8 +60,9 @@ public class ShoesTests extends BaseTest {
         "Полученное значение обуви не совпадает с ожидаемым");
   }
 
-  @Test(groups = {"regression", "smoke", "LoginWithSuccessLogin"})
+  @Test(groups = {"regression", "smoke"})
   public void negativeAddShoesTest() {
+    preCondition();
     calendarPage.isOpen();
     shoesPage.navigateToShoesPage()
         .isOpen()

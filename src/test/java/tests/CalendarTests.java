@@ -12,11 +12,12 @@ public class CalendarTests extends BaseTest {
       "×\n" + "Please fix the following errors:\n" + "*Please select a valid Activity Type.";
   private static final String INFO_FROM_DASHBOARD = "You have no past workouts within the last 14 days.";
 
-  @Test(groups = {"LoginWithSuccessLogin", "regression", "smoke", "workoutDeleteToday"})
+  @Test(groups = { "regression", "smoke", "workoutDeleteToday"})
   public void positiveAddQuickWorkOutTodayByButton() {
     AddWorkout quickWorkout = AddWorkout.builder()
         .activityType("Run")
         .build();
+    preCondition();
     dashboardPage.clickCalendarMenu();
     calendarPage.isOpen()
         .clickQuickAddToggle()
@@ -25,8 +26,9 @@ public class CalendarTests extends BaseTest {
     assertTrue(calendarPage.isWorkoutDisplayed(),"Тренировка не отображается в календаре");
   }
 
-  @Test(groups = {"LoginWithSuccessLogin", "regression"})
+  @Test(groups = { "regression"})
   public void negativeAddQuickWorkout() {
+    preCondition();
     dashboardPage.clickCalendarMenu();
     calendarPage.isOpen()
         .clickQuickAddToggle()
@@ -49,11 +51,12 @@ public class CalendarTests extends BaseTest {
 //    dashboardPage.clickCalendarMenu();
 //  }
 
-  @Test(groups = {"LoginWithSuccessLogin", "regression", "smoke", "workoutDeleteToday"})
+  @Test(groups = { "regression", "smoke", "workoutDeleteToday"})
   public void addFullFromCalendar() {
     AddWorkout fullWorkout =  AddWorkout.builder()
         .name("morning run")
         .build();
+    preCondition();
     dashboardPage.clickCalendarMenu();
     calendarPage.isOpen();
     calendarPage.clickFullWorkoutFromCalendar();
@@ -64,12 +67,13 @@ public class CalendarTests extends BaseTest {
     dashboardPage.clickCalendarMenu();
   }
 
-  @Test(groups = {"LoginWithSuccessLogin", "regression", "workoutDeleteToday"})
+  @Test(groups = { "regression", "workoutDeleteToday"})
   public void editWorkout() {
     AddWorkout quickWorkout = AddWorkout.builder()
         .activityType("Swim")
         .name("Плавание")
         .build();
+    preCondition();
     dashboardPage.clickCalendarMenu();
     calendarPage.isOpen()
         .addQuickWorkoutFromCalendar()
@@ -103,11 +107,12 @@ public class CalendarTests extends BaseTest {
     assertTrue(calendarPage.isWorkoutDisplayed(), "Тренировка измененная не отображается");
   }
 
-  @Test(groups = {"LoginWithSuccessLogin", "regression", "workoutDelete"})
+  @Test(groups = { "regression", "workoutDelete"})
   public void viewFutureTrainingFromDashboardPage() {
     AddWorkout quickWorkout = AddWorkout.builder()
         .activityType("Bike")
         .build();
+    preCondition();
     dashboardPage.clickCalendarMenu();
     calendarPage.isOpen()
         .clickQuickAddToggle()

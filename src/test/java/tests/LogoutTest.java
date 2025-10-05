@@ -10,6 +10,7 @@ public class LogoutTest extends BaseTest {
 
   @Test(groups = {"smoke", "regression"})
   public void positiveLogoutTest() {
+    preCondition();
     calendarPage.isOpen();
     dashboardPage.clickLogoutButton();
     assertEquals(logoutPage.getSuccessMessage(), LOGOUT_MESSAGE,

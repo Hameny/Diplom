@@ -11,13 +11,14 @@ public class CalculatorTests extends BaseTest {
   private static final String INTENSITY_CALC_ERROR_MESSAGE =
       "×\n" + "Please fix the following errors:\n" + "*Please enter an Integer value for Seconds.";
 
-  @Test(groups = {"LoginWithSuccessLogin", "regression", "smoke"})
+  @Test(groups = { "regression", "smoke"})
   public void positiveIntensityTest() {
     Calculator intensityCalc = Calculator.builder()
         .hours("00")
         .minutes("12")
         .seconds("5")
         .build();
+    preCondition();
     dashboardPage.clickCalculatorMenu();
     calculatorPage.isOpen()
         .selectEventType()
@@ -26,11 +27,12 @@ public class CalculatorTests extends BaseTest {
     assertTrue(calculatorPage.isWorkoutSplitResultDisplayed(),"Результат не отображается");
   }
 
-  @Test(groups = {"LoginWithSuccessLogin", "regression"})
+  @Test(groups = {"regression"})
   public void negativeIntensityTest() {
     Calculator intensityCalc = Calculator.builder()
         .minutes("18")
         .build();
+    preCondition();
     dashboardPage.clickCalculatorMenu();
     calculatorPage.isOpen()
         .selectEventType()
@@ -40,13 +42,14 @@ public class CalculatorTests extends BaseTest {
         INTENSITY_CALC_ERROR_MESSAGE,"Сообщение не совпадает с ожидаемым");
   }
 
-  @Test(groups = {"LoginWithSuccessLogin", "regression"})
+  @Test(groups = {"regression"})
   public void positiveTinmanTest() {
     Calculator intensityCalc = Calculator.builder()
         .hours("00")
         .minutes("16")
         .seconds("23")
         .build();
+    preCondition();
     dashboardPage.clickCalculatorMenu();
     calculatorPage.isOpen()
         .clickTinmanCalculator()
@@ -57,12 +60,13 @@ public class CalculatorTests extends BaseTest {
     assertTrue(calculatorPage.isWorkoutSplitResultDisplayed(),"Результат калькулятора Tinman не отображается");
   }
 
-  @Test(enabled = false, groups = {"LoginWithSuccessLogin"})
+  @Test(enabled = false, groups = {"smoke"})
   public void defectTinmanTest() {
     Calculator intensityCalc = Calculator.builder()
         .hours("00")
         .minutes("20")
         .build();
+    preCondition();
     dashboardPage.clickCalculatorMenu();
     calculatorPage.isOpen()
         .clickTinmanCalculator()
