@@ -9,7 +9,7 @@ public class ShoesTests extends BaseTest {
 
   private static final String SHOES_ERROR = "This field is required.";
 
-  @Test(groups = {"regression"})
+  @Test(groups = {"regression", "smoke"})
   public void positiveAddShoesTest() {
     AddShoes quickAddshoes = AddShoes.builder()
         .shoeName("New running Adidas shoes")
@@ -28,7 +28,7 @@ public class ShoesTests extends BaseTest {
     deleteShoes();
   }
 
-  @Test(groups = {"regression"})
+  @Test(groups = {"regression", "smoke"})
   public void positiveEditShoesTest() {
     AddShoes quickAddshoes = AddShoes.builder()
         .shoeName("NEW ADIDAS")

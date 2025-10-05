@@ -12,7 +12,7 @@ public class ReportTests extends BaseTest {
   private static final String ERROR_MESSAGE =
       "×\n" + "Please fix the following errors:\n" + "*Please select a valid Activity Zone Type.";
 
-  @Test(groups = {"regression"})
+  @Test(groups = {"regression", "smoke"})
   public void negativeViewZoneReport() {
     preCondition();
     dashboardPage.clickWorkoutReportPage();

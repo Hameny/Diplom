@@ -27,7 +27,7 @@ public class CalculatorTests extends BaseTest {
     assertTrue(calculatorPage.isWorkoutSplitResultDisplayed(),"Результат не отображается");
   }
 
-  @Test(groups = {"regression"})
+  @Test(groups = {"regression", "smoke"})
   public void negativeIntensityTest() {
     Calculator intensityCalc = Calculator.builder()
         .minutes("18")
@@ -42,7 +42,7 @@ public class CalculatorTests extends BaseTest {
         INTENSITY_CALC_ERROR_MESSAGE,"Сообщение не совпадает с ожидаемым");
   }
 
-  @Test(groups = {"regression"})
+  @Test(groups = {"regression", "smoke"})
   public void positiveTinmanTest() {
     Calculator intensityCalc = Calculator.builder()
         .hours("00")
