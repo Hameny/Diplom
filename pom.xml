@@ -102,6 +102,11 @@
           <suiteXmlFiles>
             <suiteXmlFile>src/test/resources/testNG/${suiteName}.xml</suiteXmlFile>
           </suiteXmlFiles>
+          <testFailureIgnore>false</testFailureIgnore>
+          <includes>
+            <include>**/*Test.java</include>
+            <include>**/*Tests.java</include>
+          </includes>
           <argLine>
             -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj}/aspectjweaver-${aspectj}.jar
             -Xmx256m
@@ -109,9 +114,16 @@
           <properties>
             <property>
               <name>listener</name>
-              <value>io.qameta.allure.testng.AllureTestNg</value>
+              <value>io.qameta.allure.testng.AllureTestNg,utils.TestListener</value>
             </property>
           </properties>
+          <systemProperties>
+            <property>
+              <name>allure.results.directory</name>
+              <value>${project.build.directory}/allure-results</value>
+            </property>
+            <!-- Добавьте другие системные свойства если нужно -->
+          </systemProperties>
         </configuration>
         <dependencies>
           <dependency>
