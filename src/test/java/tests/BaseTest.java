@@ -2,7 +2,6 @@ package tests;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static com.codeborne.selenide.Selenide.open;
-import static utils.AllureUtils.takeScreenshot;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.FileDownloadMode;
@@ -10,13 +9,11 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.selenide.AllureSelenide;
-import org.assertj.core.util.Arrays;
 import org.openqa.selenium.OutputType;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -102,17 +99,5 @@ public class BaseTest {
   @AfterMethod(alwaysRun = true)
   public void postCondition() {
     closeWebDriver();
-  }
-
-  @AfterMethod(alwaysRun = true)
-  public void teardown(ITestResult result) {
-    if (result.getStatus() == ITestResult.FAILURE) {
-      takeScreenshot();
-    }
-  }
-
-  @Attachment(value = "Screenshot on failure", type = "image/png")
-  public byte[] takeScreenshot() {
-    return Selenide.screenshot(OutputType.BYTES);
   }
 }
