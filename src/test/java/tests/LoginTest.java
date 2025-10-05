@@ -1,5 +1,6 @@
 package tests;
 
+import static com.codeborne.selenide.Selenide.open;
 import static org.testng.Assert.assertEquals;
 
 import org.testng.annotations.DataProvider;
@@ -9,11 +10,13 @@ public class LoginTest extends BaseTest {
 
   @Test(groups = {"regression", "smoke"})
   public void positiveLoginTest() {
+    preCondition();
     dashboardPage.isOpen();
   }
 
   @Test(groups = {"regression", "smoke"}, dataProvider = "Негативные тестовые данные для логина")
   public void negativeLoginTest(String email, String password, String errorMessage) {
+    open("/");
     loginPage.isOpen()
         .login(email, password)
         .verifyEmailErrorMessageDisplayed();
