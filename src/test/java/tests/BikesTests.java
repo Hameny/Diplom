@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class BikesTests extends BaseTest {
 
-  private static final String ERROR = "This field is required.";
+  private static final String ERROR = "This field is required.New";
 
   @Test(description = "Проверка добавления велосипеда",
       groups = {"regression", "smoke"})
