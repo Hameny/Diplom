@@ -62,7 +62,7 @@ jobs:
       # Шаг 3: Запуск тестов с использованием Maven
       # ИСПРАВЛЕНО: Секреты передаются напрямую, а не через env
       - name: Run tests
-        run: mvn clean test -DsuiteName=${{ github.event.inputs.suite || 'smoke' }} -Duser=${{ secrets.SD_USER }} -Dpassword=${{ secrets.SD_PASSWORD }}
+        run: mvn clean test -DsuiteName=${{ github.event.inputs.suite || 'allTests' }} -Duser=${{ secrets.SD_USER }} -Dpassword=${{ secrets.SD_PASSWORD }}
 
       # Шаг 4: Генерация отчета Allure
       # 'if: always()' гарантирует, что этот шаг выполнится, даже если тесты упадут
