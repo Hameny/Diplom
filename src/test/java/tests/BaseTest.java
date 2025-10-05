@@ -77,28 +77,20 @@ public class BaseTest {
         loginPage.login(BASE_LOGIN, BASE_PASSWORD);
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void cleanup(ITestResult result) {
-        try {
-            // Определяем порядок очистки явно
-            if (isTestInGroup(result, "shoesDelete")) {
-                shoesPage.deleteShoesWithConfirmation();
-            }
-            if (isTestInGroup(result, "workoutDelete")) {
-                workoutDetailsPage.clickWorkoutActionsDropdown();
-                addWorkoutPage.deleteWorkout();
-            }
-            if (isTestInGroup(result, "workoutDeleteToday")) {
-                calendarPage.deleteTodayWorkout();
-            }
-        } finally {
-            // Всегда закрываем браузер в конце
-            closeWebDriver();
-        }
+    //@AfterMethod(onlyForGroups = "shoesDelete", alwaysRun = true)
+    public void deleteShoes() {
+        shoesPage.deleteShoesWithConfirmation();
     }
 
-    private boolean isTestInGroup(ITestResult result, String group) {
-        return Arrays.asList(result.getMethod().getGroups()).contains(group);
+    //@AfterMethod(onlyForGroups = "workoutDelete", alwaysRun = true)
+    public void deleteWorkout() {
+        workoutDetailsPage.clickWorkoutActionsDropdown();
+        addWorkoutPage.deleteWorkout();
+    }
+
+    //@AfterMethod(onlyForGroups = "workoutDeleteToday", alwaysRun = true)
+    public void deleteTodayWorkout() {
+        calendarPage.deleteTodayWorkout();
     }
 
     @AfterMethod(alwaysRun = true)

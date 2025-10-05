@@ -25,7 +25,7 @@ public class ReportTests extends BaseTest {
         "Сообщение об ошибке не совпадает с ожидаемым");
   }
 
-  @Test(groups = { "regression", "smoke", "workoutDelete"})
+  @Test(groups = { "regression", "smoke"})
   public void positiveViewWorkoutReport() {
     AddWorkout quickWorkout = AddWorkout.builder()
         .activityType("Walk")
@@ -45,5 +45,6 @@ public class ReportTests extends BaseTest {
     dashboardPage.clickWorkoutDetailsLink();
     switchTo().window(1);
     workoutDetailsPage.isOpen();
+    deleteWorkout();
   }
 }

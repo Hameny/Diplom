@@ -9,7 +9,7 @@ public class ShoesTests extends BaseTest {
 
   private static final String SHOES_ERROR = "This field is required.";
 
-  @Test(groups = {"regression", "smoke", "shoesDelete"})
+  @Test(groups = {"regression"})
   public void positiveAddShoesTest() {
     AddShoes quickAddshoes = AddShoes.builder()
         .shoeName("New running Adidas shoes")
@@ -25,9 +25,10 @@ public class ShoesTests extends BaseTest {
     assertEquals(actualAddShoes.getShoeName(), quickAddshoes.getShoeName(),
         "Полученное имя обуви не совпадает с ожидаемым");
     shoesPage.clickEditShoesButton();
+    deleteShoes();
   }
 
-  @Test(groups = {"regression", "shoesDelete"})
+  @Test(groups = {"regression"})
   public void positiveEditShoesTest() {
     AddShoes quickAddshoes = AddShoes.builder()
         .shoeName("NEW ADIDAS")
@@ -58,6 +59,7 @@ public class ShoesTests extends BaseTest {
     shoesPage.waitForShoesPageLoad();
     assertEquals(actualAddShoes, editAddshoes,
         "Полученное значение обуви не совпадает с ожидаемым");
+    deleteShoes();
   }
 
   @Test(groups = {"regression", "smoke"})

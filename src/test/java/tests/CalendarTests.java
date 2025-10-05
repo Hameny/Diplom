@@ -12,7 +12,7 @@ public class CalendarTests extends BaseTest {
       "×\n" + "Please fix the following errors:\n" + "*Please select a valid Activity Type.";
   private static final String INFO_FROM_DASHBOARD = "You have no past workouts within the last 14 days.";
 
-  @Test(groups = { "regression", "smoke", "workoutDeleteToday"})
+  @Test(groups = {"regression", "smoke"})
   public void positiveAddQuickWorkOutTodayByButton() {
     AddWorkout quickWorkout = AddWorkout.builder()
         .activityType("Run")
@@ -23,17 +23,19 @@ public class CalendarTests extends BaseTest {
         .clickQuickAddToggle()
         .selectActivityType(quickWorkout)
         .clickSaveWorkoutButton();
-    assertTrue(calendarPage.isWorkoutDisplayed(),"Тренировка не отображается в календаре");
+    assertTrue(calendarPage.isWorkoutDisplayed(), "Тренировка не отображается в календаре");
+    deleteTodayWorkout();
   }
 
-  @Test(groups = { "regression"})
+  @Test(groups = {"regression"})
   public void negativeAddQuickWorkout() {
     preCondition();
     dashboardPage.clickCalendarMenu();
     calendarPage.isOpen()
         .clickQuickAddToggle()
         .clickSaveWorkoutButton();
-    assertEquals(calendarPage.getActivityTypeErrorMessage(), ACTIVITY_TYPE_ERROR,"Сообщение об ошибке не совпадает с ожидаемым");
+    assertEquals(calendarPage.getActivityTypeErrorMessage(), ACTIVITY_TYPE_ERROR,
+        "Сообщение об ошибке не совпадает с ожидаемым");
   }
 
 //  @Test(groups = {"LoginWithSuccessLogin", "regression", "smoke", "workoutDeleteToday"})
@@ -51,9 +53,9 @@ public class CalendarTests extends BaseTest {
 //    dashboardPage.clickCalendarMenu();
 //  }
 
-  @Test(groups = { "regression", "smoke", "workoutDeleteToday"})
+  @Test(groups = {"regression", "smoke"})
   public void addFullFromCalendar() {
-    AddWorkout fullWorkout =  AddWorkout.builder()
+    AddWorkout fullWorkout = AddWorkout.builder()
         .name("morning run")
         .build();
     preCondition();
@@ -65,9 +67,10 @@ public class CalendarTests extends BaseTest {
     addWorkoutPage.clickSaveWorkoutButton();
     assertEquals(addWorkoutPage.getWorkoutNameText(), fullWorkout.getName());
     dashboardPage.clickCalendarMenu();
+    deleteTodayWorkout();
   }
 
-  @Test(groups = { "regression", "workoutDeleteToday"})
+  @Test(groups = {"regression"})
   public void editWorkout() {
     AddWorkout quickWorkout = AddWorkout.builder()
         .activityType("Swim")
@@ -105,9 +108,10 @@ public class CalendarTests extends BaseTest {
     workoutDetailsPage.isOpen();
     dashboardPage.clickCalendarMenu();
     assertTrue(calendarPage.isWorkoutDisplayed(), "Тренировка измененная не отображается");
+    deleteTodayWorkout();
   }
 
-  @Test(groups = { "regression", "workoutDelete"})
+  @Test(groups = {"regression"})
   public void viewFutureTrainingFromDashboardPage() {
     AddWorkout quickWorkout = AddWorkout.builder()
         .activityType("Bike")
@@ -124,13 +128,15 @@ public class CalendarTests extends BaseTest {
     assertTrue(dashboardPage.isUpcomingWorkoutsDisplayed(), "Тренировка не отображается");
     dashboardPage.clickWorkoutDetailsLink();
     workoutDetailsPage.isOpen();
+    deleteWorkout();
   }
 
-  @Test(groups = {"LoginWithSuccessLogin", "regression"})
+  @Test(groups = {"regression"})
   public void viewPastTrainingFromDashboardPage() {
     AddWorkout quickWorkout = AddWorkout.builder()
         .activityType("Walk")
         .build();
+    preCondition();
     dashboardPage.clickCalendarMenu();
     calendarPage.isOpen()
         .clickQuickAddToggle()
@@ -150,8 +156,9 @@ public class CalendarTests extends BaseTest {
         "Информация не совпадает");
   }
 
-  @Test(groups = {"regression", "smoke", "LoginWithSuccessLogin", "workoutDelete"})
+  @Test(groups = {"regression", "smoke"})
   public void fileUploadTest() {
+    preCondition();
     calendarPage.isOpen()
         .clickPlusIconInCalendar()
         .clickUploadWorkoutButton()
@@ -159,10 +166,12 @@ public class CalendarTests extends BaseTest {
     workoutDetailsPage.isOpen();
     calendarPage.verifyDownloadButtonClickable();
     assertEquals(workoutDetailsPage.getDisplayedWorkoutName(), "Upload Workout");
+    deleteWorkout();
   }
 
-  @Test(groups = {"regression", "smoke", "LoginWithSuccessLogin", "workoutDelete"})
+  @Test(groups = {"regression", "smoke"})
   public void fileDownloadTest() {
+    preCondition();
     calendarPage.isOpen()
         .clickPlusIconInCalendar()
         .clickUploadWorkoutButton()
@@ -171,5 +180,6 @@ public class CalendarTests extends BaseTest {
     String downloadedFileName = calendarPage.downloadWorkoutFile();
     assertTrue(downloadedFileName.endsWith(".tcx"),
         "Имя файла должно начинаться с '.tcx', но было: " + downloadedFileName);
+    deleteWorkout();
   }
 }
