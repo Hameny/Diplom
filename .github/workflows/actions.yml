@@ -22,7 +22,7 @@ on:
       suite:
         description: 'Test suite to run'
         required: true
-        default: 'smoke'
+        default: 'allTests'
         type: choice
         options:
           - smoke
@@ -99,35 +99,3 @@ jobs:
           publish_dir: target/site/allure-maven-plugin
           # Сохранять предыдущие отчеты
           keep_files: true
-
-      # ДОБАВЛЕНО: Шаг 7 - Отправка Allure отчета по email
-      - name: Send Allure Report via Email
-        if: always() && (github.event.inputs.send_email == 'true' || github.event_name == 'push')
-        uses: dawidd6/action-send-mail@v3
-        with:
-          # Данные SMTP сервера (для mail.ru)
-          server_address: smtp.mail.ru
-          server_port: 465
-          username: ${{ secrets.pavel.2006.91@mail.ru}}
-          password: ${{ secrets.sUAIBT9dJodcNvjyBkXA}}
-          # Данные письма
-          subject: 'Allure Test Report - ${{ github.repository }} - ${{ github.sha }}'
-          to: Pavel.2006.91@mail.ru
-          from: GitHub Actions
-          # Текст письма
-          body: |
-            Тестовый прогон завершен!
-            
-            📊 Результаты тестирования:
-            - Репозиторий: ${{ github.repository }}
-            - Ветка: ${{ github.ref }}
-            - Коммит: ${{ github.sha }}
-            - Ссылка на отчет: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
-            - Ссылка на workflow: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-            
-            Проверьте детальный отчет по ссылке выше.
-            
-            ---
-            Это автоматическое сообщение от GitHub Actions.
-          # Прикрепляем HTML отчет
-          attachments: target/site/allure-maven-plugin/index.html
