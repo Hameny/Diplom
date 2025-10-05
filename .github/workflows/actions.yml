@@ -28,15 +28,6 @@ on:
           - smoke
           - regression
           - allTests
-      # ДОБАВЛЕНО: Включение/отключение email уведомлений
-      send_email:
-        description: 'Send email report'
-        required: false
-        default: 'true'
-        type: choice
-        options:
-          - 'true'
-          - 'false'
 
 jobs:
   # Единственное задание в этом рабочем процессе
