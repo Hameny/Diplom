@@ -1,1 +1,1 @@
-{"total":1,"items":[{"uid":"331f55adef3ddce4d1ad2ef7551a5318","name":"Smoke Tests","statistic":{"failed":0,"broken":0,"skipped":0,"passed":13,"unknown":0,"total":13}}]}
+{"total":1,"items":[{"uid":"8ea1fdc2119fe45b4a705d4e26175fe9","name":"All Tests","statistic":{"failed":5,"broken":0,"skipped":0,"passed":17,"unknown":0,"total":22}}]}
