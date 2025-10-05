@@ -30,7 +30,7 @@ import pages.WorkoutDetailsPage;
 import utils.PropertyReader;
 import utils.TestListener;
 
-//@Listeners({TestListener.class})
+@Listeners({TestListener.class})
 public class BaseTest {
     protected static final String BASE_LOGIN = PropertyReader.getProperty("login");
     protected static final String BASE_PASSWORD = PropertyReader.getProperty("password");
