@@ -1,0 +1,2092 @@
+<html lang="en-US"><head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Final Surge - Add Workout</title>
+        <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+        <link href="img/branded/finalsurge-icon-32.png" rel="shortcut icon" type="image/x-icon">                    
+
+        <!-- common stylesheets-->
+        <!-- bootstrap framework css -->
+            <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+            <link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.min.css">
+        <!-- iconSweet2 icon pack (16x16) -->
+            <link rel="stylesheet" href="img/icsw2_16/icsw2_16.css">
+        <!-- splashy icon pack -->
+            <link rel="stylesheet" href="img/splashy/splashy.css">
+        <!-- flag icons -->
+            <link rel="stylesheet" href="img/flags/flags.css">
+        <!-- power tooltips -->
+            <link rel="stylesheet" href="js/lib/powertip/jquery.powertip.css">
+        <!-- google web fonts -->
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abel">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300">
+
+        <!-- aditional stylesheets -->
+            <link rel="stylesheet" href="js/lib/reveal/reveal.css?jsver=200">
+        <!--fullcalendar -->
+            <link rel="stylesheet" href="js/lib/fullcalendar/fullcalendar_beoro.css">
+
+        <!-- main stylesheet -->
+            <link rel="stylesheet" href="css/main.css?jsver=110">
+            <link rel="stylesheet" href="css/main.responsive.css">
+
+        <!--[if lte IE 8]><link rel="stylesheet" href="css/ie8.css"><![endif]-->
+        <!--[if IE 9]><link rel="stylesheet" href="css/ie9.css"><![endif]-->
+            
+        <!--[if lt IE 9]>
+            <script src="js/ie/html5shiv.min.js"></script>
+            <script src="js/ie/respond.min.js"></script>
+            <script src="js/lib/flot-charts/excanvas.min.js"></script>
+        <![endif]-->        
+        
+        
+        <!-- datepicker -->
+        <link rel="stylesheet" href="js/lib/bootstrap-datepicker/css/datepicker.css">
+        <!-- timepicker -->
+        <link rel="stylesheet" href="js/lib/jquery-timepicker/css/jquery.timepicker.css">
+        <link rel="stylesheet" href="js/lib/smart-wizard/styles/smart_wizard.css">         
+
+        <style>
+            a { color: #c61201; }
+            a:hover { color: #c61201; }
+            header { background: #e9e9e9; }
+            header a { color: #c61201; }
+            header a:hover { color: #c61201; }
+            #breadcrumbs a:hover { background: #c61201; }
+            #breadcrumbs a:hover::before { border-color: #c61201 #c61201 #c61201 rgba(255,255,255,0); }
+            #breadcrumbs a:hover::after { border-left-color: #c61201; }   
+            
+            .w-box-blue .w-box-header { background: #368ca9 }
+            .fc-header-left .fc-state-active,.fc-header-left .fc-state-active:hover {
+	            background: #368ca9 !important;
+	            border: 1px solid #368ca9;
+	            color: #fff;
+	            text-shadow: none;
+	            cursor: default;
+            }                     
+        </style>
+        <style>
+            #fade-menu {
+            font-size: 11px !important;
+            font-weight: 400 !important;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+        </style>
+        <script type="text/javascript" async="" src="https://ssl.google-analytics.com/ga.js"></script><script type="text/javascript">
+            var JSSettingDatePickerOptions = {weekStart: 0 };
+        </script>
+    </head>
+    <body>
+
+    <!-- main wrapper (without footer) -->    
+        <div class="main-wrapper">
+        <!-- top bar -->
+            <div class="navbar navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <div class="pull-right top-search">
+                            <div style="padding-top: 7px; padding-right: 20px; font-size: 11px; color: #e9e9e9;">
+                                <a href="CoachingUpgrade.cshtml"><span class="badge pop-over" data-content="If you are a coach, click here to upgrade to a Coaching Account.  If you are not a coach, this link can be removed by going into your Settings and turning the Coaching Functionality off." data-title="Coaching Account Features" data-placement="bottom" data-trigger="hover" style="margin-right: 15px;" data-original-title="" title="">Upgrade to Coaching Account</span></a>
+                                <a href="Calendar.cshtml?m=10&amp;d=5&amp;y=2025" class="currentdatelink">Sunday, October 5, 2025</a>
+                            </div>                            
+                        </div>
+                        <div id="fade-menu" class="pull-left">
+                            <ul class="clearfix" id="mobile-nav">
+                                <li>
+                                    <a href="javascript:void(0)" class="arrow_down">Workouts</a>
+                                    <ul style="top: 34px; display: none; visibility: visible;">
+                                        <li>
+                                            <a href="WorkoutAdd.cshtml">Add Workout</a>
+                                        </li>
+                                        <li>
+                                            <a href="DeviceImport/Garmin/Default.cshtml">Garmin / Device Upload</a>
+                                        </li>
+                                        <li>
+                                            <a href="Calendar.cshtml">View Calendar</a>
+                                        </li>
+                                        <li>
+                                            <a href="WorkoutReport.cshtml">Reports &amp; Statistics</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" data-reveal-id="PrintWorkouts" data-animation="fade" data-reveal-iframe="PrintWorkoutsiFrame" data-reveal-iframeurl="https://log.finalsurge.com/PrintWorkoutsSelect.cshtml?ssl=1">Print Workouts</a>
+                                        </li>
+                                        <li>
+                                            <a href="WorkoutLibrary.cshtml">Workout Library</a>
+                                        </li>
+                                        <li>
+                                            <a href="ActivityZones.cshtml">HR/Power/Pace Zones</a>
+                                        </li>
+                                        <li>
+                                            <a href="Activities.cshtml">Customize Activity Types</a>
+                                        </li>
+                                        <li>
+                                            <a href="ImportData.cshtml">Import Data</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a href="DailyVitals.cshtml" class="arrow_down">Daily Vitals</a>
+                                    <ul style="top: 34px; display: none; visibility: visible;">
+                                        <li><a href="DailyVitals.cshtml">View &amp; Add Vitals</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="Equipment.cshtml" class="arrow_down">Gear &amp; Routes</a>
+                                    <ul style="top: 34px; display: none; visibility: visible;">
+                                        <li><a href="EquipmentShoes.cshtml">Shoes</a></li>
+                                        <li><a href="EquipmentBikes.cshtml">Bikes</a></li>
+                                        <li><a href="Routes.cshtml">Routes</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="TrainingPlans.cshtml" class="arrow_down">Training Plans</a>
+                                    <ul style="top: 34px; display: none; visibility: visible;">
+                                        <li><a href="TrainingPlans.cshtml">View My Plans</a></li>
+                                        <li><a href="http://www.finalsurge.com/trainingplans">Find a Plan</a></li>
+                                    </ul>
+                                </li>                                            
+                                <li><a href="Resources" class="arrow_down">Resources</a>
+                                    <ul style="top: 34px; display: none; visibility: visible;">
+                                        <li><a href="Resources">View Files &amp; Resources</a></li>
+                                    </ul>
+                                </li>                                     
+                                <li><a href="TeamForum/default" class="arrow_down">Message Boards</a>
+                                    <ul style="top: 34px; display: none; visibility: visible;">
+                                        <li><a href="TeamForum/default">View Boards</a></li>
+                                    </ul>
+                                </li>                                   
+                            </ul><select class="selectnav" id="selectnav1"><option value="">- Navigation -</option><option value="javascript:void(0)">Workouts</option><option value="https://log.finalsurge.com/WorkoutAdd.cshtml">- Add Workout</option><option value="https://log.finalsurge.com/DeviceImport/Garmin/Default.cshtml">- Garmin / Device Upload</option><option value="https://log.finalsurge.com/Calendar.cshtml">- View Calendar</option><option value="https://log.finalsurge.com/WorkoutReport.cshtml">- Reports &amp; Statistics</option><option value="https://log.finalsurge.com/WorkoutAdd.cshtml?id=c40dafbe-a48f-4b04-9b91-4026ec05e2d6#">- Print Workouts</option><option value="https://log.finalsurge.com/WorkoutLibrary.cshtml">- Workout Library</option><option value="https://log.finalsurge.com/ActivityZones.cshtml">- HR/Power/Pace Zones</option><option value="https://log.finalsurge.com/Activities.cshtml">- Customize Activity Types</option><option value="https://log.finalsurge.com/ImportData.cshtml">- Import Data</option><option value="https://log.finalsurge.com/DailyVitals.cshtml">Daily Vitals</option><option value="https://log.finalsurge.com/DailyVitals.cshtml">- View &amp; Add Vitals</option><option value="https://log.finalsurge.com/Equipment.cshtml">Gear &amp; Routes</option><option value="https://log.finalsurge.com/EquipmentShoes.cshtml">- Shoes</option><option value="https://log.finalsurge.com/EquipmentBikes.cshtml">- Bikes</option><option value="https://log.finalsurge.com/Routes.cshtml">- Routes</option><option value="https://log.finalsurge.com/TrainingPlans.cshtml">Training Plans</option><option value="https://log.finalsurge.com/TrainingPlans.cshtml">- View My Plans</option><option value="http://www.finalsurge.com/trainingplans">- Find a Plan</option><option value="https://log.finalsurge.com/Resources">Resources</option><option value="https://log.finalsurge.com/Resources">- View Files &amp; Resources</option><option value="https://log.finalsurge.com/TeamForum/default">Message Boards</option><option value="https://log.finalsurge.com/TeamForum/default">- View Boards</option></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <!-- header -->
+            <header>
+                <div class="container">
+                    <div class="row">
+                        <div class="span3">
+                            <div class="main-logo"><a href="default.cshtml"><img src="https://finalsurgelivestore.blob.core.windows.net/branding/finalsurge_logo.png" alt="Final Surge"></a></div>
+                        </div>
+                        <div class="span6">
+                            <nav class="nav-icons">
+                                <ul>
+                                    <li><a href="Default.cshtml" class="ptip_s"><i class="icsw16-home"></i></a></li>
+                                    <li><a href="Calendar.cshtml" class="ptip_s"><i class="icsw16-day-calendar"></i></a></li>
+                                    <li><a href="#" class="ptip_s" data-reveal-id="IntensityCalc" data-animation="fade" data-reveal-iframe="IntensityCalciFrame" data-reveal-iframeurl="https://log.finalsurge.com/WorkoutIntensityCalc.cshtml?ssl=1"><i class="icsw16-stop-watch"></i></a></li>
+                                    <li><a href="#" class="ptip_s" data-reveal-id="OtherCalc" data-animation="fade" data-reveal-iframe="OtherCalciFrame" data-reveal-iframeurl="https://log.finalsurge.com/CaloricNeedsCalc.cshtml?ssl=1"><i class="icsw16-calculator"></i></a></li>
+                                    <li><a href="WorkoutReport.cshtml" class="ptip_s"><i class="icsw16-graph"></i></a></li>
+                                    <li><a href="Mailbox.cshtml" class="ptip_s"><i class="icsw16-mail"></i>
+</a></li>
+                                    <!--<li><a href="javascript:void(0)" class="ptip_s" title="System Messages (Coming Soon)"><i class="icsw16-speech-bubbles"></i><span class="badge badge-important">14</span></a></li>-->
+                                    <li><a href="#" class="ptip_s" data-reveal-id="PrintWorkouts" data-animation="fade" data-reveal-iframe="PrintWorkoutsiFrame" data-reveal-iframeurl="https://log.finalsurge.com/PrintWorkoutsSelect.cshtml?ssl=1"><i class="icsw16-printer"></i></a></li>
+                                    <li><a href="app/betaredirect" class="ptip_s"><i class="icsw16-computer_imac"></i><span class="badge badge-info">Beta</span></a></li>                                    
+                                </ul>
+                             </nav>
+                        </div>
+                        <div class="span3">
+                            <div class="user-box">
+                                <div class="user-box-inner">
+                                    <img id="LayoutProfilePic" src="img/default-profile60x60.png" alt="" class="user-avatar img-avatar">
+                                    <div class="user-info">
+                                        Welcome, <strong>Pavel</strong>
+                                        <ul class="unstyled">
+                                            <li><a href="UserProfile.cshtml">Settings</a></li>
+                                            <li>·</li>
+                                            <li><a href="logout.cshtml">Logout</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+        <!-- breadcrumbs -->
+            <div class="container">
+                <ul id="breadcrumbs">
+                    <li><a href="default.cshtml"><i class="icon-home"></i></a></li>
+                                     
+                    <li><a href="Calendar.cshtml?m=10&amp;d=4&amp;y=2025">Training Calendar</a></li>
+                    <li><a href="WorkoutDetails.cshtml?id=c40dafbe-a48f-4b04-9b91-4026ec05e2d6">Workout Details</a></li>
+                    <li><a href="WorkoutAdd.cshtml?id=c40dafbe-a48f-4b04-9b91-4026ec05e2d6">Update Workout</a></li>
+
+                </ul>
+            </div>
+            
+        <!-- main content -->
+            <div class="container">
+                
+
+
+
+ 
+                <form action="WorkoutAdd.cshtml" method="post" id="workout-add">
+                <input id="hdnWorkoutID" type="hidden" value="c40dafbe-a48f-4b04-9b91-4026ec05e2d6" name="id">
+                <input id="hdnAKey" type="hidden" value="edfa17ff-45dc-4fe7-ae40-52e366de55e5" name="akey">
+                <input id="hdnActivityType" type="hidden" value="00000010-0010-0010-0010-000000000010" name="ActivityType">
+                <input id="hdnActivityTypeCode" type="hidden" value="walk" name="ActivityTypeCode">
+                <input id="hdnActivitySubType" type="hidden" value="" name="ActivitySubType">
+                <input id="WUGuid" type="hidden" value="" name="WUGuid">
+                <input id="CDGuid" type="hidden" value="" name="CDGuid">
+                <input type="hidden" name="Intervals" id="Intervals" value="">
+
+                <input type="hidden" name="PPaceLow" value="">
+                <input type="hidden" name="PPaceLowType" value="">
+                <input type="hidden" name="PPaceHigh" value="">
+                <input type="hidden" name="PPaceHighType" value="">
+                <input id="hdnHasHRZones" type="hidden" value="" name="HasHRZones">
+                <input id="hdnHasPWZones" type="hidden" value="" name="HasPWZones">
+                <input id="hdnHasPaceZones" type="hidden" value="" name="HasPaceZones">
+                <input id="hdnHasUserExistingHRZones" type="hidden" value="" name="UserExistingHRZones">
+                <input id="hdnHasUserExistingPWZones" type="hidden" value="" name="UserExistingPWZones">
+                <input id="hdnHasUserExistingPaceZones" type="hidden" value="" name="UserExistingPaceZones">
+                <input type="hidden" value="1" name="Add">
+                
+                <div class="row-fluid blog_page" id="AddWorkoutForm">
+                    <div id="col0" class="span2">
+                        <div class="aw_sidebar">
+                            <h5 style="margin-top: 0px;">Select an Activity Type</h5>
+                            <div class="accordion" id="blog_accordion_left">
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle typeselector" data-guid="00000001-0001-0001-0001-000000000001" data-code="run" data-toggle="collapse" data-parent="#blog_accordion_left" data-target="#sidebar_left_00000001-0001-0001-0001-000000000001"><i class="icon-chevron-left"></i>
+                                            Run
+                                        </a>
+                                    </div>
+                                    <div id="sidebar_left_00000001-0001-0001-0001-000000000001" class="accordion-body collapse">
+                                        <div class="accordion-inner">
+                                            <ul class="nav nav-list">
+                                                <li class="subtypeselector" data-guid=""><a style="cursor: pointer;">No Sub-Type</a></li>
+                    <li class="subtypeselector" data-guid="00000001-0001-0001-0001-000000000001"><a style="cursor: pointer;">Fartlek</a></li>
+                    <li class="subtypeselector" data-guid="00000002-0002-0002-0002-000000000002"><a style="cursor: pointer;">Hills</a></li>
+                    <li class="subtypeselector" data-guid="00000008-0008-0008-0008-000000000008"><a style="cursor: pointer;">Lactate Threshold</a></li>
+                    <li class="subtypeselector" data-guid="00000003-0003-0003-0003-000000000003"><a style="cursor: pointer;">Long Run</a></li>
+                    <li class="subtypeselector" data-guid="00000021-0021-0021-0021-000000000021"><a style="cursor: pointer;">Marathon Pace</a></li>
+                    <li class="subtypeselector" data-guid="00000004-0004-0004-0004-000000000004"><a style="cursor: pointer;">Recovery Run</a></li>
+                    <li class="subtypeselector" data-guid="00000005-0005-0005-0005-000000000005"><a style="cursor: pointer;">Tempo Run</a></li>
+                    <li class="subtypeselector" data-guid="00000006-0006-0006-0006-000000000006"><a style="cursor: pointer;">Track Workout</a></li>
+                    <li class="subtypeselector" data-guid="00000007-0007-0007-0007-000000000007"><a style="cursor: pointer;">VO2 Max</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle typeselector" data-guid="00000002-0002-0002-0002-000000000002" data-code="bike" data-toggle="collapse" data-parent="#blog_accordion_left" data-target="#sidebar_left_00000002-0002-0002-0002-000000000002"><i class="icon-chevron-left"></i>
+                                            Bike
+                                        </a>
+                                    </div>
+                                    <div id="sidebar_left_00000002-0002-0002-0002-000000000002" class="accordion-body collapse">
+                                        <div class="accordion-inner">
+                                            <ul class="nav nav-list">
+                                                <li class="subtypeselector" data-guid=""><a style="cursor: pointer;">No Sub-Type</a></li>
+                    <li class="subtypeselector" data-guid="00000009-0009-0009-0009-000000000009"><a style="cursor: pointer;">Intervals</a></li>
+                    <li class="subtypeselector" data-guid="00000010-0010-0010-0010-000000000010"><a style="cursor: pointer;">Long Ride</a></li>
+                    <li class="subtypeselector" data-guid="00000022-0022-0022-0022-000000000022"><a style="cursor: pointer;">Power/Strength</a></li>
+                    <li class="subtypeselector" data-guid="00000011-0011-0011-0011-000000000011"><a style="cursor: pointer;">Recovery Ride</a></li>
+                    <li class="subtypeselector" data-guid="00000014-0014-0014-0014-000000000014"><a style="cursor: pointer;">Tempo</a></li>
+                    <li class="subtypeselector" data-guid="00000013-0013-0013-0013-000000000013"><a style="cursor: pointer;">Time Trial</a></li>
+                    <li class="subtypeselector" data-guid="00000012-0012-0012-0012-000000000012"><a style="cursor: pointer;">Trainer</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle typeselector" data-guid="00000003-0003-0003-0003-000000000003" data-code="swim" data-toggle="collapse" data-parent="#blog_accordion_left" data-target="#sidebar_left_00000003-0003-0003-0003-000000000003"><i class="icon-chevron-left"></i>
+                                            Swim
+                                        </a>
+                                    </div>
+                                    <div id="sidebar_left_00000003-0003-0003-0003-000000000003" class="accordion-body collapse">
+                                        <div class="accordion-inner">
+                                            <ul class="nav nav-list">
+                                                <li class="subtypeselector" data-guid=""><a style="cursor: pointer;">No Sub-Type</a></li>
+                    <li class="subtypeselector" data-guid="00000015-0015-0015-0015-000000000015"><a style="cursor: pointer;">Drills</a></li>
+                    <li class="subtypeselector" data-guid="00000016-0016-0016-0016-000000000016"><a style="cursor: pointer;">Endurance</a></li>
+                    <li class="subtypeselector" data-guid="00000017-0017-0017-0017-000000000017"><a style="cursor: pointer;">Intervals</a></li>
+                    <li class="subtypeselector" data-guid="00000018-0018-0018-0018-000000000018"><a style="cursor: pointer;">Open Water</a></li>
+                    <li class="subtypeselector" data-guid="00000019-0019-0019-0019-000000000019"><a style="cursor: pointer;">Recovery Swim</a></li>
+                    <li class="subtypeselector" data-guid="00000020-0020-0020-0020-000000000020"><a style="cursor: pointer;">Tempo</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle typeselector" data-guid="00000004-0004-0004-0004-000000000004" data-code="cross-trai" data-toggle="collapse" data-parent="#blog_accordion_left" data-target="#sidebar_left_00000004-0004-0004-0004-000000000004"><i class="icon-chevron-left"></i>
+                                            Cross Training
+                                        </a>
+                                    </div>
+                                    <div id="sidebar_left_00000004-0004-0004-0004-000000000004" class="accordion-body collapse">
+                                        <div class="accordion-inner">
+                                            <ul class="nav nav-list">
+                                                <li class="subtypeselector" data-guid=""><a style="cursor: pointer;">No Sub-Type</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle typeselector acc-in" data-guid="00000010-0010-0010-0010-000000000010" data-code="walk" data-toggle="collapse" data-parent="#blog_accordion_left" data-target="#sidebar_left_00000010-0010-0010-0010-000000000010"><i class="icon-chevron-down"></i>
+                                            Walk
+                                        </a>
+                                    </div>
+                                    <div id="sidebar_left_00000010-0010-0010-0010-000000000010" class="accordion-body in collapse" style="height: auto;">
+                                        <div class="accordion-inner">
+                                            <ul class="nav nav-list">
+                                                <li class="active subtypeselector" data-guid=""><a style="cursor: pointer;">No Sub-Type</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle typeselector" data-guid="00000006-0006-0006-0006-000000000006" data-code="rest" data-toggle="collapse" data-parent="#blog_accordion_left" data-target="#sidebar_left_00000006-0006-0006-0006-000000000006"><i class="icon-chevron-left"></i>
+                                            Rest Day
+                                        </a>
+                                    </div>
+                                    <div id="sidebar_left_00000006-0006-0006-0006-000000000006" class="accordion-body collapse">
+                                        <div class="accordion-inner">
+                                            <ul class="nav nav-list">
+                                                <li class="subtypeselector" data-guid=""><a style="cursor: pointer;">No Sub-Type</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle typeselector" data-guid="00000005-0005-0005-0005-000000000005" data-code="strength-t" data-toggle="collapse" data-parent="#blog_accordion_left" data-target="#sidebar_left_00000005-0005-0005-0005-000000000005"><i class="icon-chevron-left"></i>
+                                            Strength Training
+                                        </a>
+                                    </div>
+                                    <div id="sidebar_left_00000005-0005-0005-0005-000000000005" class="accordion-body collapse">
+                                        <div class="accordion-inner">
+                                            <ul class="nav nav-list">
+                                                <li class="subtypeselector" data-guid=""><a style="cursor: pointer;">No Sub-Type</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle typeselector" data-guid="00000007-0007-0007-0007-000000000007" data-code="recovery" data-toggle="collapse" data-parent="#blog_accordion_left" data-target="#sidebar_left_00000007-0007-0007-0007-000000000007"><i class="icon-chevron-left"></i>
+                                            Recovery/Rehab
+                                        </a>
+                                    </div>
+                                    <div id="sidebar_left_00000007-0007-0007-0007-000000000007" class="accordion-body collapse">
+                                        <div class="accordion-inner">
+                                            <ul class="nav nav-list">
+                                                <li class="subtypeselector" data-guid=""><a style="cursor: pointer;">No Sub-Type</a></li>
+                    <li class="subtypeselector" data-guid="00000026-0026-0026-0026-000000000026"><a style="cursor: pointer;">Active Release</a></li>
+                    <li class="subtypeselector" data-guid="00000025-0025-0025-0025-000000000025"><a style="cursor: pointer;">Chiropractor</a></li>
+                    <li class="subtypeselector" data-guid="00000024-0024-0024-0024-000000000024"><a style="cursor: pointer;">Massage</a></li>
+                    <li class="subtypeselector" data-guid="00000023-0023-0023-0023-000000000023"><a style="cursor: pointer;">Physical Therapy</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle typeselector" data-guid="00000008-0008-0008-0008-000000000008" data-code="other" data-toggle="collapse" data-parent="#blog_accordion_left" data-target="#sidebar_left_00000008-0008-0008-0008-000000000008"><i class="icon-chevron-left"></i>
+                                            Other
+                                        </a>
+                                    </div>
+                                    <div id="sidebar_left_00000008-0008-0008-0008-000000000008" class="accordion-body collapse">
+                                        <div class="accordion-inner">
+                                            <ul class="nav nav-list">
+                                                <li class="subtypeselector" data-guid=""><a style="cursor: pointer;">No Sub-Type</a></li>
+                    <li class="subtypeselector" data-guid="00000028-0028-0028-0028-000000000028"><a style="cursor: pointer;">Appointment</a></li>
+                    <li class="subtypeselector" data-guid="00000030-0030-0030-0030-000000000030"><a style="cursor: pointer;">Illness</a></li>
+                    <li class="subtypeselector" data-guid="00000029-0029-0029-0029-000000000029"><a style="cursor: pointer;">Injury</a></li>
+                    <li class="subtypeselector" data-guid="00000027-0027-0027-0027-000000000027"><a style="cursor: pointer;">Notes</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle typeselector" data-guid="00000009-0009-0009-0009-000000000009" data-code="trans" data-toggle="collapse" data-parent="#blog_accordion_left" data-target="#sidebar_left_00000009-0009-0009-0009-000000000009"><i class="icon-chevron-left"></i>
+                                            Transition
+                                        </a>
+                                    </div>
+                                    <div id="sidebar_left_00000009-0009-0009-0009-000000000009" class="accordion-body collapse">
+                                        <div class="accordion-inner">
+                                            <ul class="nav nav-list">
+                                                <li class="subtypeselector" data-guid=""><a style="cursor: pointer;">No Sub-Type</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle" href="Activities.cshtml"><i class="icon-chevron-left"></i>
+                                            Add New Type
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div id="col1" class="span5">
+                        <div id="noneselected" style="text-align: center; padding: 20px; display: none;">
+                            <div class="hero-unit" style="margin-top: 14px;">
+                                <p style="text-align: center;">Please select an Activity Type for this workout.</p>
+                                <p style="text-align: center; font-size: 11px;"><a href="WorkoutCustomize.cshtml?id=c40dafbe-a48f-4b04-9b91-4026ec05e2d6">Customize this page</a></p>
+                            </div>                           
+                        </div>
+                        <div class="w-box w-box-blue workoutarea" style="">
+                            <div class="w-box-header">
+                                <h4>Update Workout</h4><a class="icsw16-cog-3 icsw16-white ptip_n" id="CustomizePage99" href="WorkoutCustomize.cshtml?id=c40dafbe-a48f-4b04-9b91-4026ec05e2d6" style="float: right; margin-left: 5px;"></a>
+                            </div> 
+                            <div class="w-box-content">                               
+                                <div class="formSep">
+                                    <div class="row-fluid">
+                                        <div class="span6">
+                                            <div class="input-append date" id="w-date" data-date="10/4/2025" data-date-format="mm/dd/yyyy">
+                                            <label for="WorkoutDate" class="req">Date</label>
+                                            <input id="WorkoutDate" name="WorkoutDate" class="span8" value="10/4/2025" type="text"><span class="add-on"><i class="icon-calendar"></i></span>                                            </div>
+                                        </div>                                    
+                                        <div class="span6 workoutarea  rest">
+                                            <label for="WorkoutTime">Time of Day</label>                                            
+                                            <div class="input-append time">
+                                                <input type="text" id="WorkoutTime" name="WorkoutTime" value="" class="span8 ui-timepicker-input" autocomplete="off"><span class="add-on"><i class="icon-time"></i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="formSep workoutarea ">
+                                    <div class="row-fluid">
+                                        <div class="workoutarea ">
+                                            <label for="Name">Workout Name</label>
+                                            <input type="text" class="span12" name="Name" id="Name" value="">
+                                        </div>
+                                        <div class="workoutarea ">
+                                            <label for="Desc">Workout Description</label>
+                                            <textarea rows="5" class="span12 autosize_textarea" style="height: 90px; overflow: hidden; overflow-wrap: break-word; resize: none;" name="Desc" id="Desc"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="workoutarea  strength-t other recovery rest" style="padding-left: 20px; padding-right: 20px; padding-bottom: 20px;">
+                                    <label for="PlannedWorkout" class="checkbox inline"> 
+                                        <input type="checkbox" name="PlannedWorkout" id="PlannedWorkout" data-toggle="collapse" data-target="#PlannedWorkoutForm" value="True">
+                                        <span class="label label-warning">Show Planned Distance/Duration</span>         <i class="splashy-help pop-over" data-content="If you are planning a future workout or just want to record how much distance and duration was orginally planned for this workout (compared to the actual distance and duration you record below), check this box." data-title="Planned Distance and Duration" data-placement="right" data-trigger="hover" data-original-title="" title=""></i>   
+
+                                    </label>
+                                    <div id="PlannedWorkoutForm" class="accordion-body collapse">
+                                        <div class="row-fluid" style="margin-top: 15px;">
+                                            <div class="row-fluid">
+                                                <div class="span6 workoutarea  rest recovery other">
+                                                    <label for="PDistance">Planned Distance</label>
+                                                    <input type="text" class="span6" id="PDistance" name="PDistance" value="" maxlength="9">  
+                                                    <select id="PDistType" name="PDistType" class="span5">
+                                                            <option value="mi">mi</option><option value="km">km</option><option value="me">m</option><option value="yd">yd</option>
+                                                    </select>  
+                                                </div>
+                                                <div class="span6 workoutarea  other recovery rest">
+                                                    <label for="PDuration">Planned Duration</label>
+                                                    <input type="text" id="PDuration" name="PDuration" value="" placeholder="hh:mm:ss" class="span7" maxlength="13">                                            
+                                                </div>
+                                            </div>    
+                                        </div>                                                 
+                                    </div>
+                                </div>
+                                <div id="NoIntervals" style="display: none;">
+                                    <input type="hidden" name="IsNoInt" id="IsNoInt" value="">
+                                            <div class="formSep workoutarea  other recovery rest">
+                                                <div class="row-fluid">
+                                                    <div class="span6 workoutarea  rest recovery other strength-t">
+                                                        <label for="DistanceNoInt">Distance</label>
+                                                        <input type="text" class="span6" id="DistanceNoInt" name="DistanceNoInt" value="" maxlength="9">  
+                                                        <select id="DistTypeNoInt" name="DistTypeNoInt" class="span5">
+                                                            <option value="mi">mi</option>
+                                                            <option value="km">km</option>
+                                                            <option value="me">m</option>
+                                                            <option value="yd">yd</option>
+                                                        </select>  
+                                                    </div>
+                                                    <div class="span6 workoutarea  other recovery rest">
+                                                        <label for="DurationNoInt">Duration</label>                                                                                        
+                                                        <input type="text" id="DurationNoInt" name="DurationNoInt" value="" placeholder="hh:mm:ss" class="span7" maxlength="13">
+                                                    </div>
+                                                </div> 
+                                                <div class="row-fluid" style="margin-top: 0px; padding-top: 0px;">
+                                                    <div class="span6 workoutarea  rest recovery other strength-t">
+                                                        <label for="PaceNoInt">Pace</label>
+                                                        <input type="text" id="PaceNoInt" name="PaceNoInt" value="" placeholder="mm:ss" class="span4" maxlength="8">
+                                                        <select id="PaceTypeNoInt" name="PaceTypeNoInt" style="width: 100px;">
+                                                            <option value="mi">min/mi</option>
+                                                            <option value="km">min/km</option>
+                                                            <option value="mp">mph</option>
+                                                            <option value="kp">kph</option>
+                                                            <option value="me">min/100m</option>
+                                                            <option value="yd">min/100y</option>
+                                                            <option value="mm">min/1500m</option>
+                                                        </select>                                          
+                                                        <span class="help-block">*Calculated if left blank</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                </div>
+
+<div class="workoutarea  strength-t recovery other rest cross-trai" data-toggle="NoIntervals" data-togglenotify="IsNoInt" data-togglenotifyvalue="True">
+                                <!--START TABS-->
+                                <div class="tabbable tabbable-bordered">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a data-toggle="tab" href="#tb1_a" id="tBasic" style="border-left: 0px;">Basic Workout</a></li>
+                                        <li class=""><a data-toggle="tab" href="#tb1_b" id="tIntervals">Advanced Workout (Intervals)</a></li>
+                                    </ul>
+                                    <div class="tab-content" style="border-left: 0px; border-right: 0px; border-bottom: 0px;">
+                                        <div id="tb1_a" class="tab-pane active">
+                                            <div class="formSep workoutarea  other recovery rest">
+                                                <div class="row-fluid">
+                                                    <div class="span6 workoutarea  rest recovery other strength-t">
+                                                        <label for="Distance">Distance</label>
+                                                        <input type="text" class="span6" id="Distance" name="Distance" value="" maxlength="9">  
+                                                        <select id="DistType" name="DistType" class="span5">
+                                                            <option value="mi">mi</option>
+                                                            <option value="km">km</option>
+                                                            <option value="me">m</option>
+                                                            <option value="yd">yd</option>
+                                                        </select>  
+                                                    </div>
+                                                    <div class="span6 workoutarea  other recovery rest">
+                                                        <label for="Duration">Duration</label>                                                                                        
+                                                        <input type="text" id="Duration" name="Duration" value="" placeholder="hh:mm:ss" class="span7" maxlength="13">
+                                                    </div>
+                                                </div> 
+                                                <div class="row-fluid" style="margin-top: 0px; padding-top: 0px;">
+                                                    <div class="span6 workoutarea  rest recovery other strength-t">
+                                                        <label for="Pace">Pace</label>
+                                                        <input type="text" id="Pace" name="Pace" value="" placeholder="mm:ss" class="span4" maxlength="8">
+                                                        <select id="PaceType" name="PaceType" style="width: 100px;">
+                                                            <option value="mi">min/mi</option>
+                                                            <option value="km">min/km</option>
+                                                            <option value="mp">mph</option>
+                                                            <option value="kp">kph</option>
+                                                            <option value="me">min/100m</option>
+                                                            <option value="yd">min/100y</option>
+                                                            <option value="mm">min/1500m</option>
+                                                        </select>                                          
+                                                        <span class="help-block">*Calculated if left blank</span>
+                                                    </div>
+                                                </div>
+                                            </div>                                     
+                                        </div>
+                                        <div id="tb1_b" class="tab-pane ">
+                                            <!--INTERVALS-->
+                                            <div id="IntervalsForm" class="accordion-body">
+                                                <table class="table table-condensed table-hover" style="font-size: 11px; border-top: 1px solid #a2a2a2;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Set</th>
+                                                            <th>Reps</th>    
+                                                            <th></th>                                                                                                   
+                                                            <th>Distance</th>
+                                                            <th>Duration</th>
+                                                            <th>Set Recovery Time/Distance<a href="#" data-reveal-id="Tutorial"><i data-powertip="View Tutorial" class="splashy-information ptip_n" style="float: right; margin-top: 2px;"></i></a></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="SetList">
+                                                        <tr id="SetTemplate" style="display: none;">
+                                                            <td><input type="hidden" id="SetActKey--SetNumber--" name="SetActKey--SetNumber--" value=""><input type="hidden" id="SetID--SetNumber--" data-set="--SetNumber--" name="SetData" value="--SetNumber--"><span id="SetLabel--SetNumber--">--SetNumber--</span>.</td>
+                                                            <td><input type="text" id="SetReps--SetNumber--" data-set="--SetNumber--" name="SetReps--SetNumber--" value="" maxlength="3" class="span2" style="font-size: 11px; width: 30px; line-height: 11px;"></td>
+                                                            <td>x</td>
+                                                            <td><input type="text" id="SetDist--SetNumber--" data-set="--SetNumber--" name="SetDist--SetNumber--" value="" maxlength="5" class="span3" style="font-size: 11px; width: 50px; line-height: 11px;"> <select id="SetDistType--SetNumber--" data-set="--SetNumber--" name="SetDistType--SetNumber--" style="font-size: 11px; line-height: 11px; width: 55px;"><option value="mi">mi</option><option value="km">km</option><option value="me">m</option><option value="yd">yd</option></select></td>
+                                                            <td><input type="text" id="SetTime--SetNumber--" data-set="--SetNumber--" name="SetTime--SetNumber--" value="" maxlength="12" class="span3" placeholder="mm:ss" style="font-size: 11px; width: 50px; line-height: 11px;"> <i data-powertip="Expand Reps" id="RepToggle--SetNumber--" data-set="--SetNumber--" class="icon-chevron-down ptip_n" style="margin-left: 5px; cursor: pointer;"></i></td>
+                                                            <td><input type="text" id="SetRestTime--SetNumber--" data-set="--SetNumber--" name="SetRestTime--SetNumber--" value="" maxlength="12" class="span3" disabled="disabled" placeholder="mm:ss" style="font-size: 11px; width: 50px; line-height: 11px;visibility: hidden;"><span id="SetRestSep--SetNumber--" style="visibility: hidden;"> / </span><input type="text" id="SetRestAmount--SetNumber--" data-set="--SetNumber--" name="SetRestAmount--SetNumber--" disabled="disabled" value="" maxlength="12" class="span3" style="font-size: 11px; width: 50px; line-height: 11px; visibility: hidden;"> <select id="SetRestType--SetNumber--" data-set="--SetNumber--" name="SetRestType--SetNumber--" disabled="disabled" style="font-size: 11px; line-height: 11px; width: 55px; visibility: hidden;"><option value="mi">mi</option><option value="me">m</option><option value="km">km</option><option value="yd">yd</option></select>
+                                                                <i data-powertip="Add Another Set" id="SetAdd--SetNumber--" data-set="--SetNumber--" style="display: none; margin-left: 5px; cursor: pointer;" class="icon-plus"></i>
+                                                                <i data-powertip="Delete This Set" id="SetDelete--SetNumber--" data-set="--SetNumber--" style=" margin-left: 5px; cursor: pointer;" class="icon-remove"></i></td>
+                                                        </tr>
+                                                        <tr id="SetTemplateReps" style="display: none;">
+                                                            <td colspan="6" style="padding-left: 15px;">
+                                                                <table width="100%">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td style="border-width: 0px; font-weight: bold;">Rep #</td>
+                                                                            <td style="border-width: 0px; font-weight: bold;">Distance</td>
+                                                                            <td style="border-width: 0px; font-weight: bold;">Duration</td>
+                                                                            <td style="border-width: 0px; font-weight: bold;">Recovery Time/Distance</td>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="RepsList--SetNumber--">
+                                                                        <tr id="Reps--SetNumber--Template" style="display: none;">
+                                                                            <td style="border-width: 0px;"><input type="hidden" id="SetRepActivityKey--SetNumber-----RepNumber--" value=""><input type="hidden" id="SetID--SetNumber--RepID--RepNumber--" data-set="--SetNumber--" data-rep="--RepNumber--" name="SetData--SetNumber--RepData--RepNumber--" value="--SetNumber-----RepNumber--"><span id="NumLabel--SetNumber-----RepNumber--">--RepNumber--</span>.</td>
+                                                                            <td style="border-width: 0px;"><input type="text" id="RepDist--SetNumber-----RepNumber--" data-set="--SetNumber--" data-rep="--RepNumber--" name="RepDist--SetNumber-----RepNumber--" value="" maxlength="5" class="span3" style="font-size: 11px; width: 50px; line-height: 11px;"> <select id="RepDistType--SetNumber-----RepNumber--" data-set="--SetNumber--" data-rep="--RepNumber--" name="RepDistType--SetNumber-----RepNumber--" style="font-size: 11px; line-height: 11px; width: 55px;"><option value="mi">mi</option><option value="km">km</option><option value="me">m</option><option value="yd">yd</option></select></td>
+                                                                            <td style="border-width: 0px;"><input type="text" id="RepTime--SetNumber-----RepNumber--" data-set="--SetNumber--" data-rep="--RepNumber--" name="RepTime--SetNumber-----RepNumber--" value="" maxlength="12" class="span3" placeholder="mm:ss" style="font-size: 11px; width: 50px; line-height: 11px;"></td>
+                                                                            <td style="border-width: 0px;"><input type="text" id="RepRestTime--SetNumber-----RepNumber--" data-set="--SetNumber--" data-rep="--RepNumber--" name="RepRestTime--SetNumber-----RepNumber--" disabled="disabled" value="" maxlength="12" class="span3" placeholder="mm:ss" style="font-size: 11px; width: 50px; line-height: 11px;visibility: hidden;"><span id="RepRestSep--SetNumber-----RepNumber--" style="visibility: hidden;"> / </span><input type="text" id="RepRestAmount--SetNumber-----RepNumber--" data-set="--SetNumber--" data-rep="--RepNumber--" disabled="disabled" name="RepRestAmount--SetNumber-----RepNumber--" value="" maxlength="12" class="span3" style="font-size: 11px; width: 50px; line-height: 11px;visibility: hidden;"> <select id="RepRestType--SetNumber-----RepNumber--" data-set="--SetNumber--" data-rep="--RepNumber--" name="RepRestType--SetNumber-----RepNumber--" style="font-size: 11px; line-height: 11px; width: 55px;visibility: hidden;"><option value="mi">mi</option><option value="km">km</option><option value="me">m</option><option value="yd">yd</option></select>
+                                                                                <i data-powertip="Add Another Rep" id="RepAdd--SetNumber-----RepNumber--" data-set="--SetNumber--" data-rep="--RepNumber--" style="display: none; margin-left: 5px; cursor: pointer;" class="icon-plus"></i>
+                                                                                <i data-powertip="Copy to Next Rep" id="RepCopy--SetNumber-----RepNumber--" data-set="--SetNumber--" data-rep="--RepNumber--" style="margin-left: 5px; cursor: pointer;" class="icon-chevron-down"></i>
+                                                                                <i data-powertip="Delete This Rep" id="RepDelete--SetNumber-----RepNumber--" data-set="--SetNumber--" data-rep="--RepNumber--" style=" margin-left: 5px; cursor: pointer;" class="icon-remove"></i></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!--END INTERVALS-->
+                                        </div>
+                                        </div>
+
+                                    </div>
+</div>
+                                
+                                <div class="formSep workoutarea  rest cross-trai run swim recovery other strength-t">
+                                    <div class="row-fluid">
+                                        <div class="span6 workoutarea  rest recovery other">
+                                            <label for="EGain">Elevation Gain</label>
+                                            <input type="text" class="span5" id="EGain" name="EGain" value="" maxlength="9">  
+                                            <select id="EGainDistType" name="EGainDistType" class="span4"><option value="ft">ft</option><option value="me">m</option></select>  
+                                        </div>
+                                        <div class="span6 workoutarea  other recovery rest">
+                                            <label for="ELoss">Elevation Loss</label>
+                                            <input type="text" class="span5" id="ELoss" name="ELoss" value="" maxlength="9">  
+                                            <select id="ELossDistType" name="ELossDistType" class="span4"><option value="ft">ft</option><option value="me">m</option></select>                                           
+                                        </div>
+                                    </div>                                    
+                                </div>
+<!-- EFFORT -->
+<!-- RACE INFO -->
+                                <div class="formSep workoutarea  rest other recovery strength-t challenge trans">
+                                    <label for="IsRace" class="checkbox inline"> 
+                                        <input type="checkbox" name="IsRace" id="IsRace" data-toggle="collapse" data-target="#IsRaceForm" value="True">
+                                        <span class="label label-warning">Mark as Race</span>         <i class="splashy-help pop-over" data-content="If you are putting a race on the calendar, check this box to signify that the workout is a race.  This will also allow you to record additional data pertaining to the race." data-title="Mark as Race" data-placement="right" data-trigger="hover" data-original-title="" title=""></i>   
+
+                                    </label>
+                                    <div id="IsRaceForm" class="accordion-body collapse">
+                                        <div class="row-fluid" style="margin-top: 15px;">
+                                            <div class="row-fluid">
+                                                <div class="span6 workoutarea ">
+                                                    <label for="OverallPlace">Overall Place</label>
+                                                    <input type="text" class="span6" id="OverallPlace" name="OverallPlace" value="" maxlength="6">                                                      
+                                                </div>
+                                                <div class="span6 workoutarea ">
+                                                    <label for="AgeGroupPlace">Age Group Place</label>
+                                                    <input type="text" id="AgeGroupPlace" name="AgeGroupPlace" value="" class="span6" maxlength="6">                                            
+                                                </div>
+                                            </div>    
+                                        </div>                                                 
+                                    </div>
+                                </div>                                    
+                                <div class="formSep workoutarea  recovery other rest">
+                                    <div class="row-fluid">
+                                        <div class="span12 workoutarea  rest other recovery" style="padding-bottom: 15px;">
+                                            <label for="HowFeel">How I Felt</label>
+                                            <div class="ibutton-group">
+                                                <label for="hf_great" class="radio inline" style="margin-right: 5px;">
+                                                    <input type="radio" name="howfeel" value="1" id="hf_great">
+                                                    <span class="label label-success">Great</span>
+                                                </label>
+                                                <label for="hf_good" class="radio inline" style="margin-right: 5px;">
+                                                    <input type="radio" name="howfeel" value="2" id="hf_good">
+                                                    <span class="label label-info">Good</span>
+                                                </label>
+                                                <label for="hf_normal" class="radio inline" style="margin-right: 5px;">
+                                                    <input type="radio" name="howfeel" value="3" id="hf_normal">
+                                                    <span class="label">Normal</span>
+                                                </label>
+                                                <label for="hf_poor" class="radio inline" style="margin-right: 5px;">
+                                                    <input type="radio" name="howfeel" value="4" id="hf_poor">
+                                                    <span class="label label-warning">Poor</span>
+                                                </label>
+                                                <label for="hf_terrible" class="radio inline" style="margin-right: 5px;">
+                                                    <input type="radio" name="howfeel" value="5" id="hf_terrible">
+                                                    <span class="label label-important">Terrible</span>
+                                                </label>
+                                            </div>                                              
+                                        </div>
+                                    </div>   
+                                    <div class="row-fluid workoutarea  recovery other rest" style="margin-top: 0px; padding-top: 0px;">
+                                        <div class="span6">
+                                            <label for="PerEffort">Perceived Effort</label>
+                                            <select id="PerEffort" name="PerEffort" class="span12">
+                                                <option value="">Select...</option>
+                                                <option value="1">1 (Very Light)</option>
+                                                <option value="2">2 (Light)</option>
+                                                <option value="3">3 (Light)</option>
+                                                <option value="4">4 (Moderate)</option>
+                                                <option value="5">5 (Moderate)</option>
+                                                <option value="6">6 (Moderate)</option>
+                                                <option value="7">7 (Hard)</option>
+                                                <option value="8">8 (Hard)</option>
+                                                <option value="9">9 (Very Hard)</option>
+                                                <option value="10">10 (Max Effort)</option>
+                                            </select>
+                                        </div>
+                                    </div>                                                     
+                                </div>
+
+                                <div class="formSep workoutarea  swim run cross-trai rest other recovery strength-t">
+                                    <div class="row-fluid">
+                                        <div class="span4 workoutarea  strength-t recovery other rest cross-trai run swim">
+                                            <label for="PowAvg">Avg Power</label>
+                                            <input type="text" class="span8" id="PowAvg" name="PowAvg" value="" maxlength="4"> watts   
+                                        </div>
+                                        <div class="span4 workoutarea  swim run cross-trai rest other recovery strength-t">
+                                            <label for="PowMax">Max Power</label>
+                                            <input type="text" class="span8" id="PowMax" name="PowMax" value="" maxlength="4"> watts   
+                                        </div>
+                                    </div>   
+                                    <div class="row-fluid" style="margin-top: 0px; padding-top: 0px;">
+                                        <div class="span4 workoutarea  strength-t recovery other rest cross-trai run swim">
+                                            <label for="CadAvg">Avg Cadence</label>
+                                            <input type="text" class="span8" id="CadAvg" name="CadAvg" value="" maxlength="3"> rpm   
+                                        </div>
+                                        <div class="span4 workoutarea  swim run cross-trai rest other recovery strength-t">
+                                            <label for="CadMax">Max Cadence</label>
+                                            <input type="text" class="span8" id="CadMax" name="CadMax" value="" maxlength="3"> rpm   
+                                        </div>
+                                    </div>                                                     
+                                </div>
+                                <div class="formSep workoutarea  rest recovery other strength-t">
+                                    <div class="row-fluid">
+                                        <div class="span4 workoutarea  recovery other rest swim">
+                                            <label for="MinHR">Min HR</label>
+                                            <input type="text" class="span8" id="MinHR" name="MinHR" value="" maxlength="3"> bpm   
+                                        </div>
+                                        <div class="span4 workoutarea  rest swim recovery other">
+                                            <label for="AvgHR">Avg HR</label>
+                                            <input type="text" class="span8" id="AvgHR" name="AvgHR" value="" maxlength="3"> bpm   
+                                        </div>
+                                        <div class="span4 workoutarea  other recovery swim rest">
+                                            <label for="MaxHR">Max HR</label>
+                                            <input type="text" class="span8" id="MaxHR" name="MaxHR" value="" maxlength="3"> bpm                                               
+                                        </div>
+                                    </div>   
+                                    <div class="row-fluid workoutarea  other recovery rest" style="margin-top: 0px; padding-top: 0px;"> 
+                                        <div class="span4">
+                                            <label for="kCal">Calories Burned</label>
+                                            <input type="text" class="span8" id="kCal" name="kCal" value="" maxlength="8"> kCal   
+                                        </div>             
+                                    </div>                                                    
+                                </div>
+
+                                <div class="formSep sepH_b">
+                                    <div class="row-fluid">
+                                        <div class="span6">
+                                            <input type="button" class="btn btn-primary" name="btnSubmit" value="Update Workout" id="saveButton"> 
+                                            <a href="WorkoutDetails.cshtml?id=c40dafbe-a48f-4b04-9b91-4026ec05e2d6" class="btn btn-link">Cancel</a>
+                                        </div>
+                                        <div class="span6">
+                                            <label for="SaveLibrary" class="checkbox inline"> 
+                                                <input type="checkbox" name="SaveLibrary" id="SaveLibrary" value="True">
+                                                <span class="label label-info">Save to Library</span>         <i class="splashy-help pop-over" data-content="If you would like to save a copy of this workout to your Workout Library, check this box.  In order to save the workout to your library you must enter at least one of the following: name, description, planned distance or planned duration." data-title="Save to Workout Library" data-placement="right" data-trigger="hover" data-original-title="" title=""></i>   
+
+                                            </label>
+                                            <a href="WorkoutAdd.cshtml?id=c40dafbe-a48f-4b04-9b91-4026ec05e2d6&amp;delete=c40dafbe-a48f-4b04-9b91-4026ec05e2d6" class="btn btn-mini pull-right" title="Delete" id="del-workout"><i class="icon-trash"></i></a>                                                                                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="col2" class="span5">                    
+                        <div data-label="notes" class="w-box hideable workoutarea  rest" style="">
+                            <div class="w-box-header" style="cursor: pointer;"><i class="icon-white icon-plus"></i>
+                                <h4>Post Workout Notes &amp; Results</h4>
+                            </div>
+                            <div class="w-box-content" style="display: none;">
+                                <div class="formSep">
+                                    <label for="PostDesc">Post Workout Notes/Results</label>
+                                    <textarea rows="5" class="span12 autosize_textarea" style="height: 90px; overflow: hidden; overflow-wrap: break-word; resize: none;" name="PostDesc" id="PostDesc"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="EquipmentListBox" data-label="equipment" class="w-box hideable workoutarea  rest swim cross-trai recovery other strength-t" style="">
+                            <div class="w-box-header" style="cursor: pointer;"><i class="icon-white icon-plus"></i>
+                                <h4>Equipment</h4>
+                            </div>
+                            <div class="w-box-content " style="display: none;">
+                                <div class="formSep" id="EquipmentListContainer" style="display: none;">
+                                    <label id="EquipmentListLabel" for="EquipmentList"></label>
+                                    <select name="EquipmentList" id="EquipmentList" class="span8" data-container="EquipmentListContainer" data-na="EquipmentListNotAvailable" data-label="EquipmentListLabel" data-wbox="EquipmentListBox"></select>
+                                </div>
+                                <div class="formSep" id="EquipmentListNotAvailable" style="">
+                                    None Available.  Manage equipment using the <a href="/Equipment.cshtml">Equipment</a> page.
+                                </div>
+                            </div>
+                        </div>
+                        <div data-label="routes" id="RouteBox" class="w-box hideable workoutarea  strength-t other recovery swim cross-trai rest" style="">
+                            <div class="w-box-header" style="cursor: pointer;"><i class="icon-plus icon-white"></i>
+                                <h4>Routes</h4>
+                            </div>
+                            <div class="w-box-content content-hide">
+                                <div class="formSep">
+                                    <div id="RouteContainer" style="display: none;">
+                                        <label for="Route">Route</label>
+                                        <select name="Route" id="Routes" class="span8" data-container="RouteContainer" data-na="RouteNotAvailable" data-wbox="RouteBox"></select>
+                                    </div>
+                                    <div id="RouteNotAvailable" style="">
+                                        None Available.  Manage routes using the <a href="/Routes.cshtml">Routes</a> page.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-label="warmcool" id="WarmCoolBox" class="w-box hideable workoutarea  rest swim recovery other strength-t" style="">
+                            <div class="w-box-header" style="cursor: pointer;"><i class="icon-plus icon-white"></i>
+                                <h4>Warm-up &amp; Cool-down</h4>
+                            </div>
+                            <div class="w-box-content content-hide">
+                                <div class="formSep workoutarea  other recovery rest">
+                                    <div class="row-fluid">
+                                        <div class="span5 workoutarea  other recovery rest">
+                                            <label for="WUDistance">Warm-up Distance</label>
+                                            <input type="text" class="span6" id="WUDistance" name="WUDistance" value="" maxlength="9">  
+                                            <select id="WUDistType" name="WUDistType" class="span5"><option value="mi">mi</option><option value="km">km</option><option value="me">m</option><option value="yd">yd</option></select>  
+                                        </div>
+                                        <div class="span7 workoutarea  rest recovery other">
+                                            <label for="WUDuration">Warm-up Duration</label>
+                                            <input type="text" id="WUDuration" name="WUDuration" value="" placeholder="hh:mm:ss" class="span7" maxlength="13">                                            
+                                        </div>
+                                    </div>
+                                    <div class="row-fluid workoutarea  other recovery rest" style="margin-top: 0px; padding-top: 0px;">
+                                        <div id="WUEquipmentListContainer" style="display: none;">
+                                            <label id="WUEquipmentListLabel" for="WUEquipmentList" data-prepend="Warm-up "></label>
+                                            <select name="WUEquipmentList" id="WUEquipmentList" class="span8" data-container="WUEquipmentListContainer" data-na="WUEquipmentListNotAvailable" data-label="WUEquipmentListLabel" data-wbox="WarmCoolBox"></select> 
+                                        </div>  
+                                        <div id="WUEquipmentListNotAvailable" style="">
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="formSep workoutarea  rest recovery other">
+                                    <div class="row-fluid">
+                                        <div class="span5 workoutarea  rest recovery other">
+                                            <label for="CDDistance">Cool-down Distance</label>
+                                            <input type="text" class="span6" id="CDDistance" name="CDDistance" value="" maxlength="9">  
+                                            <select id="CDDistType" name="CDDistType" class="span5"><option value="mi">mi</option><option value="km">km</option><option value="me">m</option><option value="yd">yd</option></select>  
+                                        </div>
+                                        <div class="span7 workoutarea  other recovery rest">
+                                            <label for="CDDuration">Cool-down Duration</label>
+                                            <input type="text" id="CDDuration" name="CDDuration" value="" placeholder="hh:mm:ss" class="span7" maxlength="13">                                            
+                                        </div>
+                                    </div>
+                                    <div class="row-fluid workoutarea  rest recovery other" style="margin-top: 0px; padding-top: 0px;">
+                                        <div id="CDEquipmentListContainer" style="display: none;">
+                                            <label id="CDEquipmentListLabel" for="CDEquipmentList" data-prepend="Cool-down "></label>
+                                            <select name="CDEquipmentList" id="CDEquipmentList" class="span8" data-container="CDEquipmentListContainer" data-na="CDEquipmentListNotAvailable" data-label="CDEquipmentListLabel" data-wbox="WarmCoolBox"></select> 
+                                        </div>  
+                                        <div id="CDEquipmentListNotAvailable" style="">
+                                        </div>                                   
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                        <div data-label="weather" class="w-box hideable workoutarea  rest swim recovery other strength-t" style="">
+                            <div class="w-box-header" style="cursor: pointer;"><i class="icon-plus icon-white"></i>
+                                <h4>Weather</h4>
+                            </div>
+                            <div class="w-box-content content-hide">
+                                <div class="formSep">
+                                    <div class="row-fluid workoutarea  rest other recovery">
+                                        <div class="span12">
+                                            <table style="width: 100%;">
+                                                <tbody><tr>
+                                                    <td class="weather"><label for="Sunny"><img src="img/weather/sunny32.png" class="weathericon ptip_n"><br><input type="checkbox" name="Sunny" id="Sunny" value="True" class="weather"></label></td>
+                                                    <td class="weather"><label for="PartSunny"><img src="img/weather/partlycloudy32.png" class="weathericon ptip_n"><br><input type="checkbox" name="PartSunny" id="PartSunny" value="True"></label></td>
+                                                    <td class="weather"><label for="Cloudy"><img src="img/weather/cloudy32.png" class="weathericon ptip_n"><br><input type="checkbox" name="Cloudy" id="Cloudy" value="True"></label></td>
+                                                    <td class="weather"><label for="LightRain"><img src="img/weather/lightrain32.png" class="weathericon ptip_n"><br><input type="checkbox" name="LightRain" id="LightRain" value="True"></label></td>
+                                                    <td class="weather"><label for="HeavyRain"><img src="img/weather/heavyrain32.png" class="weathericon ptip_n"><br><input type="checkbox" name="HeavyRain" id="HeavyRain" value="True"></label></td>
+                                                    <td class="weather"><label for="Snow"><img src="img/weather/snow32.png" class="weathericon ptip_n"><br><input type="checkbox" name="Snow" id="Snow" value="True"></label></td>
+                                                    <td class="weather"><label for="Wind"><img src="img/weather/windy32.png" class="weathericon ptip_n"><br><input type="checkbox" name="Wind" id="Wind" value="True"></label></td>
+                                                </tr>
+                                            </tbody></table>                                            
+                                        </div>
+                                    </div>
+                                    <div class="row-fluid" style="margin-top: 0px; padding-top: 0px;">
+                                        <div class="span6 workoutarea  recovery other rest">
+                                            <label for="Temp">Temperature</label>
+                                            <input type="text" class="span6" id="Temp" name="Temp" value="" maxlength="6">  
+                                            <select id="TempType" name="TempType" class="span4">
+                                                <option value="F" selected="">°F</option>
+                                                <option value="C">°C</option>
+                                            </select>  
+                                        </div>
+                                        <div class="span6 workoutarea  rest other recovery">
+                                            <label for="Humid">Humidity</label>
+                                            <input type="text" id="Humid" name="Humid" class="span6" value="" maxlength="6"> %                                            
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div data-label="hrzones" class="w-box hideable workoutarea  strength-t other recovery cross-trai swim rest" style="">
+                            <div class="w-box-header" style="cursor: pointer;"><i class="icon-plus icon-white"></i>
+                                <h4>Heart Rate Zones</h4>
+                            </div>
+                            <div class="w-box-content content-hide" id="HRZoneContent">
+                                <input type="hidden" name="HRZoneCount" id="HRZoneCount" value="">
+                                    <table class="table" id="HRZoneTable" style="display: none;">
+                                        <thead>
+                                        <tr>
+                                            <th>Zone (bpm)</th>
+                                            <th>Duration</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody><tr id="HRZone1Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="HRZone1Label"> ( -  bpm)</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="Z1Duration" name="Z1Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="HRZone2Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="HRZone2Label"> ( -  bpm)</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="Z2Duration" name="Z2Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="HRZone3Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="HRZone3Label"> ( -  bpm)</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="Z3Duration" name="Z3Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="HRZone4Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="HRZone4Label"> ( -  bpm)</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="Z4Duration" name="Z4Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="HRZone5Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="HRZone5Label"> ( -  bpm)</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="Z5Duration" name="Z5Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="HRZone6Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="HRZone6Label"> ( -  bpm)</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="Z6Duration" name="Z6Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="HRZone7Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="HRZone7Label"> ( -  bpm)</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="Z7Duration" name="Z7Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="HRZone8Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="HRZone8Label"> ( -  bpm)</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="Z8Duration" name="Z8Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="HRZone9Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="HRZone9Label"> ( -  bpm)</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="Z9Duration" name="Z9Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="HRZone10Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="HRZone10Label"> ( -  bpm)</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="Z10Duration" name="Z10Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                    </tbody></table>
+                                <div class="formSep" id="HRZoneSetup" style="display: block;">
+                                    You do not have any Heart Rate Zones set up for this Activity Type.  <a href="/ActivityZones.cshtml">Click here</a> to add zones.
+                                </div>
+                                <div class="formSep" id="HRZoneWorking" style="display: none;">
+                                    Loading Heart Rate Zones...
+                                </div>
+                            </div>
+                        </div>
+                        <div data-label="pwzones" class="w-box hideable workoutarea  cross-trai run swim rest other recovery strength-t" style="">
+                            <div class="w-box-header" style="cursor: pointer;"><i class="icon-plus icon-white"></i>
+                                <h4>Power Zones</h4>
+                            </div>
+                            <div class="w-box-content content-hide" id="PowerZoneContent">
+                                <input type="hidden" name="PowerZoneCount" id="PowerZoneCount" value="">
+                                    <table class="table" id="PowerZoneTable" style="display: none;">
+                                        <thead>
+                                        <tr>
+                                            <th>Zone (watts)</th>
+                                            <th>Duration</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody><tr id="PowerZone1Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="PowerZone1Label"> ( -  watts)</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="PW1Duration" name="PW1Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="PowerZone2Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="PowerZone2Label"> ( -  watts)</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="PW2Duration" name="PW2Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="PowerZone3Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="PowerZone3Label"> ( -  watts)</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="PW3Duration" name="PW3Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="PowerZone4Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="PowerZone4Label"> ( -  watts)</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="PW4Duration" name="PW4Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="PowerZone5Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="PowerZone5Label"> ( -  watts)</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="PW5Duration" name="PW5Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="PowerZone6Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="PowerZone6Label"> ( -  watts)</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="PW6Duration" name="PW6Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="PowerZone7Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="PowerZone7Label"> ( -  watts)</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="PW7Duration" name="PW7Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="PowerZone8Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="PowerZone8Label"> ( -  watts)</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="PW8Duration" name="PW8Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="PowerZone9Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="PowerZone9Label"> ( -  watts)</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="PW9Duration" name="PW9Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="PowerZone10Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="PowerZone10Label"> ( -  watts)</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="PW10Duration" name="PW10Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                    </tbody></table>
+                                <div class="formSep" id="PowerZoneSetup" style="display: block;">
+                                    You do not have any Power Zones set up for this Activity Type.  <a href="/ActivityZones.cshtml">Click here</a> to add zones.
+                                </div>
+                                <div class="formSep" id="PowerZoneWorking" style="display: none;">
+                                    Loading Power Zones...
+                                </div>
+                            </div>
+                        </div>
+<div data-label="pacezones" class="w-box hideable workoutarea  trans challenge strength-t walk recovery other rest swim bike cross-trai" style="display: none;">
+                            <div class="w-box-header" style="cursor: pointer;"><i class="icon-plus icon-white"></i>
+                                <h4>Pace Zones</h4>
+                            </div>
+                            <div class="w-box-content content-hide" id="PaceZoneContent">
+                                <input type="hidden" name="PaceZoneCount" id="PaceZoneCount" value="">
+                                    <table class="table" id="PaceZoneTable" style="display: none;">
+                                        <thead>
+                                        <tr>
+                                            <th>Zone</th>
+                                            <th>Duration</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody><tr id="PaceZone1Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="PaceZone1Label"> ( -  )</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="Pace1Duration" name="Pace1Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="PaceZone2Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="PaceZone2Label"> ( -  )</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="Pace2Duration" name="Pace2Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="PaceZone3Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="PaceZone3Label"> ( -  )</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="Pace3Duration" name="Pace3Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="PaceZone4Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="PaceZone4Label"> ( -  )</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="Pace4Duration" name="Pace4Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="PaceZone5Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="PaceZone5Label"> ( -  )</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="Pace5Duration" name="Pace5Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="PaceZone6Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="PaceZone6Label"> ( -  )</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="Pace6Duration" name="Pace6Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="PaceZone7Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="PaceZone7Label"> ( -  )</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="Pace7Duration" name="Pace7Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="PaceZone8Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="PaceZone8Label"> ( -  )</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="Pace8Duration" name="Pace8Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="PaceZone9Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="PaceZone9Label"> ( -  )</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="Pace9Duration" name="Pace9Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                        <tr id="PaceZone10Row" style="display: none;">
+                                            <td style="vertical-align: middle; padding-bottom: 4px;" id="PaceZone10Label"> ( -  )</td>
+                                            <td style=" padding-bottom: 4px;"><input type="text" id="Pace10Duration" name="Pace10Duration" value="" placeholder="hh:mm:ss" style="width: 70px;" maxlength="13"></td>
+                                        </tr>
+                                    </tbody></table>
+                                <div class="formSep" id="PaceZoneSetup" style="display: block;">
+                                    You do not have any Pace Zones set up for this Activity Type. <a href="ActivityZones">Click here</a> to add zones. 
+                                </div>
+                                <div class="formSep" id="PaceZoneWorking" style="display: none;">
+                                    Loading Pace Zones...
+                                </div>
+                            </div>
+                        </div>                            
+                    </div>
+                </div>
+                </form>
+
+                    <div id="Tutorial" class="reveal-modal">
+                        <div class="w-box w-box-blue">
+                            <div class="w-box-header">
+                                <h4>Advanced Workout (Intervals)</h4>
+                            </div>
+                            <div class="w-box-content">
+                                <div class="row-fluid">
+                                    <div class="span12">
+                                        <div id="wizard-vertical" class="swMain swVertical">
+                                            <ul class="anchor">
+                                                <li>
+                                                    <a href="#sw-ver-step-1" style="width: 130px;" class="selected" isdone="1" rel="1">
+                                                        <span class="stepNumber">1</span>
+                                                        <span class="stepDesc">
+                                                           <small>Create a Set<br>with Repetitions</small>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#sw-ver-step-2" style="width: 130px;" class="disabled" isdone="0" rel="2">
+                                                        <span class="stepNumber">2</span>
+                                                        <span class="stepDesc">
+                                                           <small>Record the<br>Repetitions</small>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#sw-ver-step-3" style="width: 130px;" class="disabled" isdone="0" rel="3">
+                                                        <span class="stepNumber">3</span>
+                                                        <span class="stepDesc">
+                                                           <small>Adding Additional<br>Sets</small>
+                                                        </span>
+                                                     </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#sw-ver-step-4" style="width: 130px;" class="disabled" isdone="0" rel="4">
+                                                        <span class="stepNumber">4</span>
+                                                        <span class="stepDesc">
+                                                           <small>Sets without<br>Repetitions</small>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            
+                                            
+                                            
+                                            
+                                        <div class="stepContainer" style="height: 434px;"><div id="sw-ver-step-1" class="content" style="display: block;">
+                                                <h2 class="StepTitle">Create a Set with Repetitions</h2>
+                                                <p>The advanced interval functionality allows you to create workouts with multiple sets and repetitions.  This feature was designed to allow you track as much or as little information about an interval workout that you want.  All fields are not required and may or may not be used depending on the specifics of your workout.  Below is a quick tutorial to help you get the most out of this powerful feature.</p>
+                                                <p><img src="img/tutorial/Tutorial-CreateSetA.png"></p>
+                                                <p>There are two types of sets you can create.  Distance based sets (such as 5 x 800m) and time based sets (such as 4 x 5:00).  If you are creating a distance based set you will need to fill out the following fields:</p>
+                                                <ul>
+                                                    <li>The number of repetitions this set will include <span class="badge badge-warning">1</span></li>
+                                                    <li>The distance of each repetition (800m, 2k, 1mi, etc.) <span class="badge badge-warning">2</span></li>
+                                                </ul>
+                                                <p>If you are creating a time based set, you will fill out the following fields:</p>
+                                                <ul>
+                                                    <li>The number of repetitions this set will include <span class="badge badge-warning">1</span></li>
+                                                    <li>The amount of time (duration) of each repetition <span class="badge badge-warning">3</span></li>
+                                                </ul>
+                                                <p>Once you have filled out the set information, click the down arrow <span class="badge badge-warning">4</span> to expand each individual repetition.</p>
+                                            </div><div id="sw-ver-step-2" class="content" style="display: none;">
+                                                <h2 class="StepTitle">Record the Repetitions</h2>
+                                                <p><img src="img/tutorial/Tutorial-CreateRepsA.png"></p>
+                                                <p>In the example above, 5 repetitions of 800m each were expanded.  You will now be able to record time, distance and recovery for each repetition based on your workout.  Below is a description of each repetition field:</p>                                                
+                                                <p style="padding-left: 15px;"><span class="badge badge-warning">1</span> If you have created a distance based set, then all of the distances will be equal such as in the example above.  Conversely, if you created a time based set where you tracked how much distance you covered in a fix time interval, then each distance may differ in length.</p>
+                                                <p style="padding-left: 15px;"><span class="badge badge-warning">2</span> The amount of time (duration) that it took you to cover the distance of the repetition.  If you have a time based set (such as 4 x 5:00), then all of the times would be equal.</p>
+                                                <p style="padding-left: 15px;"><span class="badge badge-warning">3</span> The amount of recovery (in time) that you took between each repetition.  In the example above, 1:30 recovery was given between each 800m repetition.</p>
+                                                <p style="padding-left: 15px;"><span class="badge badge-warning">4</span> The amount of recovery (in distance) that you took between each repetition.   If the above workout required a 200m recovery interval instead of a timed interval, that would be recorded here.</p>
+                                                <p style="padding-left: 15px;"><span class="badge badge-warning">5</span> Click the down arrow to copy all of the data from the current repetition down to the next repetition if the data you are recording for the two repetitions are equal.  This is simply a time-saving function.</p>
+                                                <p style="padding-left: 15px;"><span class="badge badge-warning">6</span> Click the delete icon to delete a repetition from the current set.</p>
+                                                <p style="padding-left: 15px;"><span class="badge badge-warning">7</span> Click the plus icon to add an additional repetition to the current set.  In the above example, clicking the icon once would change the workout to 6 x 800m.</p>                                                
+                                            </div><div id="sw-ver-step-3" class="content" style="display: none;">
+                                                <h2 class="StepTitle">Adding Additional Sets</h2>
+                                                <p><img src="img/tutorial/Tutorial-AddMoreSetsA.png"></p>
+                                                <p>To add an additional set to the workout, click the plus icon <span class="badge badge-warning">1</span>.  Clicking this icon will display the Set Recovery/Time Distance Fields (shown below).</p>
+                                                <p><img src="img/tutorial/Tutorial-AddSetRestA.png"></p>
+                                                <p>Once you have added an additional set, you can then record a set recovery in time and/or distance <span class="badge badge-warning">1</span>/<span class="badge badge-warning">2</span>.  For example, you might create a second set of 4 x 200m but you want to record that you took a 5:00 rest before starting your second set.</p>
+                                                <p>If you would like to delete a set entirely including any repetitions that you have recorded for that set, click the delete icon <span class="badge badge-warning">3</span>.</p>
+                                            </div><div id="sw-ver-step-4" class="content" style="display: none;">
+                                                <h2 class="StepTitle">Create a Set without Repetitions</h2>	
+                                                <p>If you do not care about the individual repetitions and just want to record that you completed a set, you can do so by filling out the Reps, Distance and Duration fields shown below.</p>
+                                                <p><img src="img/tutorial/TutorialSetNoRepsA.png"></p>
+                                                <p>In the example above, type in the amount of repetitions <span class="badge badge-warning">1</span> you completed, the distance of each repetition <span class="badge badge-warning">2</span>, and the average time it took you to complete each repetition <span class="badge badge-warning">3</span>.  If you save the workout like the example above and not record individual repetitions, the training log will record that you completed 4000m of distance over a period of 15:00.</p>
+                                            </div></div><div class="actionBar"><div class="msgBox alert alert-error"><button data-dismiss="alert" class="close" type="button">×</button><div class="content"></div></div><div class="loader">Loading</div><button type="submit" href="#" class="btn btn-inverse buttonFinish disabled buttonDisabled" style="display: none;">Finish</button><a href="#" class="btn buttonNext">Next</a><a href="#" class="btn buttonPrevious disabled buttonDisabled" style="display: none;">Previous</a></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="close-reveal-modal">×</a>
+                    </div>
+                
+
+
+            </div>
+            <div class="footer_space"></div>
+        </div> 
+        <div id="IntensityCalc" class="reveal-modal largeplus">            
+            <iframe id="IntensityCalciFrame" width="641" height="660" style="border-width: 0px;"></iframe>
+            <a class="close-reveal-modal">×</a>
+        </div>
+        <div id="OtherCalc" class="reveal-modal large">            
+            <iframe id="OtherCalciFrame" width="541" height="660" style="border-width: 0px;"></iframe>
+            <a class="close-reveal-modal">×</a>
+        </div>    
+        <div id="ColorCompletion" class="reveal-modal large">            
+            <iframe id="ColorCompletioniFrame" width="541" height="660" style="border-width: 0px;"></iframe>
+            <a class="close-reveal-modal">×</a>
+        </div>    
+        <div id="WorkoutComments" class="reveal-modal large">            
+            <iframe id="WorkoutCommentsiFrame" width="541" height="660" style="border-width: 0px;"></iframe>
+            <a class="close-reveal-modal">×</a>
+        </div>
+        <div id="CopyWeeks" class="reveal-modal large">            
+            <iframe id="CopyWeeksiFrame" width="541" height="660" style="border-width: 0px;"></iframe>
+            <a class="close-reveal-modal">×</a>
+        </div>
+        <div id="ViewMessage" class="reveal-modal large">            
+            <iframe id="ViewMessageiFrame" width="541" height="660" style="border-width: 0px;"></iframe>
+            <a class="close-reveal-modal">×</a>
+        </div>          
+        <div id="WorkoutUpload" class="reveal-modal large">            
+            <iframe id="WorkoutUploadiFrame" width="541" height="660" style="border-width: 0px;"></iframe>
+            <a class="close-reveal-modal">×</a>
+        </div>
+        <div id="TrainingPlanDetails" class="reveal-modal large">            
+            <iframe id="TrainingPlanDetailsiFrame" width="541" height="660" style="border-width: 0px;"></iframe>
+            <a class="close-reveal-modal">×</a>
+        </div>
+        <div id="PrintWorkouts" class="reveal-modal large">            
+            <iframe id="PrintWorkoutsiFrame" width="541" height="600" style="border-width: 0px;"></iframe>
+            <a class="close-reveal-modal">×</a>
+        </div>    
+        <div id="PainInjuryModal" class="reveal-modal xxlarge" style="height:600px;background: white;">
+            <iframe id="PainInjuryFrame" scrolling="no" width="1000" style="border-width: 0px;height:100%;"></iframe>
+            <a class="close-reveal-modal">×</a>
+        </div>    
+        <div id="WorkoutCreatorModal" class="reveal-modal xxlarge" style="height:89vh;background: white;padding: 30px 0 30px 0;position:fixed;top: 40px;">
+            <iframe id="WorkoutCreatorFrame" width="1000" style="border-width: 0px;height:100%;"></iframe>
+            <a class="close-reveal-modal">×</a>
+        </div>    
+    <!-- footer --> 
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="span5">
+                        <div>Copyright © 2025 Final Surge LLC.</div>
+                    </div>
+                    <div class="span7" style="text-align: right;">
+                        <ul class="unstyled">
+                            <li><a href="Feedback.cshtml">Give Feedback</a></li>
+                            <li>·</li>
+                            <li><a href="CustSupport.cshtml">Customer Support</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        
+    <!-- Common JS -->
+        <!-- jQuery framework -->
+            <script src="js/jquery.min.js"></script>
+            <script src="js/lib/jquery-cookie/jquery.cookie.js"></script>
+            <script src="js/FSErrors.js"></script>
+        <!-- bootstrap Framework plugins -->
+            <script src="bootstrap/js/bootstrap.js"></script>
+        <!-- top menu -->
+            <script src="js/jquery.fademenu.js"></script>
+        <!-- top mobile menu -->
+            <script src="js/selectnav.min.js"></script>
+        <!-- actual width/height of hidden DOM elements -->
+            <script src="js/jquery.actual.min.js"></script>
+        <!-- jquery easing animations -->
+            <script src="js/jquery.easing.1.3.min.js"></script>
+        <!-- power tooltips -->
+            <script src="js/lib/powertip/jquery.powertip-1.1.0.min.js"></script>
+        <!-- date library -->
+            <script src="js/moment.min.js"></script>
+        <!-- common functions -->
+            <script src="js/beoro_common.js"></script>
+            <script src="js/form/bootstrap-fileupload.js"></script>
+        <!-- save panels -->
+            <script src="js/lib/jquery-ui/jquery-ui.js"></script>
+        <!-- reveal modal -->
+            <script src="js/lib/reveal/jquery.reveal.js?ver=4"></script>
+              
+    <!-- datepicker -->
+        <script charset="utf-8" type="text/javascript" src="js/lib/bootstrap-datepicker/js/bootstrap-datepicker.en.js?111"></script>
+
+    <!-- timepicker -->
+    <script src="js/lib/jquery-timepicker/jquery.timePicker.min.js"></script>
+    <!-- bootbox -->
+    <script src="js/lib/bootbox/bootbox.mod.js"></script>
+    <!-- placeholder -->
+    <script src="js/lib/jquery-placeholder/jquery.placeholder.js"></script>
+    <script src="js/lib/pacecalc/PaceCalc.js"></script>
+    <script src="js/pages/WorkoutAdd.cshtml_Intervals.js"></script>
+    <script src="js/lib/smart-wizard/js/jquery.smartWizard.min.js"></script>   
+    <script src="js/form/jquery.autosize.min.js"></script>        
+    <!-- FSProgress -->
+    <script src="js/lib/fsprogress/fsprogress.js?v=2"></script>
+
+    <div id="AjaxGrey1" style="position: absolute; display:none; z-index: 99999;">
+        <div style="float:left; height: 100%; width: 100%; background: #b1b1b1; filter: alpha(opacity=30);opacity: 0.30;-moz-opacity:0.30;-ms-filter:'progid:DXImageTransform.Microsoft.Alpha(Opacity=30)'"></div>
+    <div style="position:absolute; bottom: 50%; left: 50%; width: 32px; height: 32px; margin-top: -16px; margin-left: -16px;">
+        <img src="/img/loading.gif">
+    </div>
+</div>
+<div id="AjaxLoading1" style="position: absolute; display:none; z-index: 99999;">
+    <div style="float:left; height: 100%; width: 100%; background: #FFFFFF; filter: alpha(opacity=80);opacity: 0.80;-moz-opacity:0.80;-ms-filter:'progid:DXImageTransform.Microsoft.Alpha(Opacity=80)'"></div>
+    <div style="position:absolute; top: 50%; left: 50%; width: 16px; height: 16px; margin-top: -10px; margin-left: -8px;">
+        <img src="/img/loading-sm.gif">
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        FSProgress.Init();
+
+        $('#saveButton').click(function (e) {
+            FSProgress.ShowWorking('AddEditForm', 'AjaxGrey1', 'AddWorkoutForm', 'AjaxLoading1', 'saveButton');
+            $("#workout-add").submit();
+        });
+
+    });
+</script>
+    <script>
+        var ActivityTypeDef = "00000010-0010-0010-0010-000000000010";
+        var ActivitySubTypeDef = "";
+        var EquipmentListDef = "";
+        var WUEquipmentListDef = "";
+        var CDEquipmentListDef = "";
+        var RouteDef = "";
+        $(document).ready(function () {
+            //*datepicker
+            beoro_datepicker.init();
+            $('#WorkoutTime').timepicker({
+                'scrollDefaultTime': '06:00 AM',
+                'className': 'picktime',
+                'step': 15,
+                'timeFormat': 'h:i A'
+            });
+            //* autosize textarea
+            beoro_autosize_textarea.init();
+        // Main Activity Types
+        $(".typeselector").click(function () {
+            var useMetric = false;
+            var el = $(this);
+            var code = el.data("code");
+            var guid = el.data("guid");
+            var target = el.data("target");
+            var IsDefault = (ActivityTypeDef != "");
+            if (!el.hasClass("acc-in")) {
+                $("#noneselected").fadeOut((ActivityTypeDef != "") ? 1 : 100, function () {
+                    $("#hdnActivityTypeCode").attr("value", code);
+                    $("#hdnActivityType").attr("value", guid);
+                    var Pace = $("#PaceType");
+                    if(Pace.length == 1 && !IsDefault)
+                    {
+                        switch (guid) {
+                            case "00000002-0002-0002-0002-000000000002": // Bike
+                                Pace.val(useMetric ? "kp" : "mp");
+                                break;
+                            case "00000003-0003-0003-0003-000000000003": // Swim
+                                Pace.val(useMetric ? "me" : "me");
+                                break;
+                            default:
+                                Pace.val(useMetric ? "km" : "mi");
+                                break;
+                        }
+                        Pace.trigger("change");
+                    }
+                    var PaceNoInt = $("#PaceTypeNoInt");
+                    if(PaceNoInt.length == 1 && !IsDefault)
+                    {
+                        switch (guid) {
+                            case "00000002-0002-0002-0002-000000000002": // Bike
+                                PaceNoInt.val(useMetric ? "kp" : "mp");
+                                break;
+                            case "00000003-0003-0003-0003-000000000003": // Swim
+                                PaceNoInt.val(useMetric ? "me" : "me");
+                                break;
+                            default:
+                                PaceNoInt.val(useMetric ? "km" : "mi");
+                                break;
+                        }
+                        PaceNoInt.trigger("change");
+                    }
+
+                    SectionToggle(code, code);
+                    GetEquipmentData(guid);
+                    GetRoutesData(guid);
+                    GetZoneInfo(guid)
+                    var tar = $(target);
+                    if (ActivitySubTypeDef != "") {
+                        tar.find(".subtypeselector").each(function (i, v) {
+                            if ($(this).data("guid") == ActivitySubTypeDef) {
+                                $(this).click();
+                                return false;
+                            }
+                        });
+                        ActivitySubTypeDef = "";
+                    }
+                    else {
+                        tar.find(".subtypeselector").first().click();
+                    }
+                });
+            }
+            else {
+                $("#hdnActivityTypeCode").attr("value", "");
+                $("#hdnActivityType").attr("value", "");
+                $("#hdnActivitySubType").attr("value", "");
+                SectionToggleAllOff();
+            }
+        });
+        // Sub Activity Types
+        $(".subtypeselector").click(function () {
+            var el = $(this);
+            var guid = el.data("guid");
+            $(".subtypeselector").not(el).removeClass("active");
+            el.addClass("active");
+            $("#hdnActivitySubType").attr("value", guid);
+        });
+        if (ActivityTypeDef != "") {
+            $(".typeselector").each(function (i, e) {
+                if ($(this).data("guid") == ActivityTypeDef) {
+                    $(this).click();
+                    return false;
+                }
+            });
+            ActivityTypeDef = "";
+        }
+        // Placeholder text
+        $(":input[placeholder]").placeholder();
+        beoro_wizard.w_vertical(function () { $("#Tutorial").trigger('reveal:close'); });
+        });
+
+    function SectionToggleAllOff() {
+        $(".workoutarea").fadeOut(300, function () {
+            $("#noneselected").fadeIn(100);
+        });
+    }
+    function SectionToggle(what, code) {
+        var show = $(".workoutarea").not("." + what);
+        show.fadeIn((ActivityTypeDef != "") ? 1 : 300);
+        show.each(function (i,e) {
+            var d = $(this).data("toggle");
+            var h = $(this).data("togglenotify");
+            var v = $(this).data("togglenotifyvalue");
+            if(d != undefined && d != "")
+            {
+                $("#" + d).hide();
+                if(h != undefined && h != "")
+                    $("#" + h).val("");
+            }
+
+        });
+        var hide = $(".workoutarea." + what);
+        hide.fadeOut((ActivityTypeDef != "") ? 1 : 300);
+        hide.each(function (i,e) {
+            var d = $(this).data("toggle");
+            var h = $(this).data("togglenotify");
+            var v = $(this).data("togglenotifyvalue");
+            if(d != undefined && d != "")
+            {
+                $("#" + d).show();
+                if(h != undefined && v != undefined)
+                    $("#" + h).val(v);
+            }
+        });
+        var areas = $(".w-box.workoutarea").not("." + what);
+        for (var i = 0; i < areas.length; i++) {
+            me = areas[i];
+            var c = $(me).closest('.w-box').find('.w-box-content');
+            var CookieName = $(me).data('label') + '-' + code;
+            var setting = $.cookie(CookieName);
+            var isHidden = c.is(':hidden');
+            var header = $(me).closest('.w-box').find('.w-box-header');
+            if ((setting == undefined || setting == null || setting == 'h') && !isHidden) {
+                try {
+                    header.click();
+                } catch (ex) { }
+            }
+            else if (setting == 's' && isHidden) {
+                try {
+                    header.click();
+                } catch (ex) { }
+            }
+        }
+    }
+
+    beoro_wizard = {
+        w_vertical: function (onFinishHandler) {
+            if ($('#wizard-vertical').length) {
+                $('#wizard-vertical').smartWizard({
+                    transitionEffect: 'slide',
+                    hideButtonsOnDisabled: true,
+                    onFinish: onFinishHandler
+                });
+            }
+        }
+    };
+
+    //* autosize textarea
+    beoro_autosize_textarea = {
+        init: function() {
+            if($('.autosize_textarea').length) {
+                $('.autosize_textarea').each(function() {
+                    $(this).autosize();
+                })
+            }
+        }
+    };
+
+    //* datepicker
+    beoro_datepicker = {
+        init: function () {
+            if ($('#w-date').length) {
+                $('#w-date').datepicker(JSSettingDatePickerOptions).on('changeDate', function () {
+                    $('#w-date').datepicker('hide');
+                });
+            }
+        }
+    };
+
+    function ProcessingStep() {
+        FSProgress.ShowWorking('CustomizeWindow', 'AjaxGrey1', 'customizer', 'AjaxLoading1', 'NextStep');
+    }
+    function StepComplete() {
+        FSProgress.HideWorking('CustomizeWindow');
+    }
+    function SetLabel(s) {
+        $("#NextStep").html(s);
+    }
+    function CustomizeComplete() {
+        FSProgress.HideWorking('CustomizeWindow');
+        bootbox.hideAll();
+        document.location.reload(true);
+    }
+    // Store this function in a variable to be able to set as actions
+    var Customizer = function (e) {
+        e.preventDefault();
+        // The Iframe's declaration
+        var str = $("<iframe src='WorkoutCustomize.cshtml' height='400' width='100%' id='customizer' frameborder='0' scrolling='auto' />");
+        // str == the content of the dialog box
+        // the following parameter is the array of buttons
+        bootbox.dialog(str, [
+        // Button 1
+        {
+            // The html "id" attribute
+            "id": "Cancel",
+            // The text of the button
+            "label": "Cancel",
+            // The class of the button
+            "class": "btn-beoro-0",
+            // The button click handler, in this case it hides the window and the upload progress
+            "callback": function () {
+                FSProgress.HideWorking('CustomizeWindow');
+                return true;
+            }
+        },
+        // Button 2
+        {
+            "id": "NextStep",
+            "label": "Please wait...",
+            "class": "btn-beoro-3",
+            "callback": function () {
+                // This function, on the source page, calls the "ProcessStep" function on the iframe page
+                if (document.getElementById("customizer").contentWindow && document.getElementById("customizer").contentWindow.ProcessStep)
+                    document.getElementById("customizer").contentWindow.ProcessStep();
+                // It returns false because we don't want the dialog window to close.. the iframe handles that
+                return false;
+            }
+        }
+        ], { "header": "Customize Workout Fields" }); // This final argument is the header of the dialog
+    }
+    // Make this element do the thumbnailer
+    $("#CustomizePage").click(Customizer);
+    </script>
+
+    <script>
+        function GetCookieModifier() {
+            var Ret = "";
+            Ret = $("#hdnActivityTypeCode").attr("value");
+            return Ret;
+        }
+        $(document).ready(function () {
+            WireUpSets();
+            $("#PlannedWorkoutForm").on('show', function () {
+                $("#PlannedWorkout").attr("disabled", true);
+            });
+            $("#PlannedWorkoutForm").on('shown', function () {
+                $("#PlannedWorkout").removeAttr("disabled");
+            });
+            $("#PlannedWorkoutForm").on('hide', function () {
+                $("#PlannedWorkout").attr("disabled", true);
+            });
+            $("#PlannedWorkoutForm").on('hidden', function () {
+                $("#PlannedWorkout").removeAttr("disabled");
+            });
+
+            $("#PlannedWorkoutFormNoInt").on('show', function () {
+                $("#PlannedWorkoutNoInt").attr("disabled", true);
+            });
+            $("#PlannedWorkoutFormNoInt").on('shown', function () {
+                $("#PlannedWorkoutNoInt").removeAttr("disabled");
+            });
+            $("#PlannedWorkoutFormNoInt").on('hide', function () {
+                $("#PlannedWorkoutNoInt").attr("disabled", true);
+            });
+            $("#PlannedWorkoutFormNoInt").on('hidden', function () {
+                $("#PlannedWorkoutNoInt").removeAttr("disabled");
+            });
+
+            var PaceCalc = function () { 
+                var D = $("#Distance");
+                var DType = $("#DistType");
+                var Dur = $("#Duration");
+                var PType = $("#PaceType");
+                var Pace = $("#Pace");
+                if (D.length == 0 || DType.length == 0 || Dur.length == 0 || PType.length == 0 || Pace.length == 0) return;
+                Pace.val(GetPace(Dur.val(), D.val(), DType.val(), PType.val()));
+            }
+            $("#Distance").on("change", PaceCalc);
+            $("#Distance").on("keyup", PaceCalc);
+            BindCleanTime("#Duration", true);
+            BindCleanTime("#PDuration", true);
+            $("#Duration").on("change", PaceCalc);
+            $("#Duration").on("keyup", PaceCalc);
+            $("#DistType").on("change", PaceCalc);
+            $("#PaceType").on("change", PaceCalc);
+            var PaceCalcNoInt = function () { 
+                var D = $("#DistanceNoInt");
+                var DType = $("#DistTypeNoInt");
+                var Dur = $("#DurationNoInt");
+                var PType = $("#PaceTypeNoInt");
+                var Pace = $("#PaceNoInt");
+                if (D.length == 0 || DType.length == 0 || Dur.length == 0 || PType.length == 0 || Pace.length == 0) return;
+                Pace.val(GetPace(Dur.val(), D.val(), DType.val(), PType.val()));
+            }
+            $("#DistanceNoInt").on("change", PaceCalcNoInt);
+            $("#DistanceNoInt").on("keyup", PaceCalcNoInt);
+            BindCleanTime("#DurationNoInt", true);
+            BindCleanTime("#PDurationNoInt", true);
+            $("#DurationNoInt").on("change", PaceCalcNoInt);
+            $("#DurationNoInt").on("keyup", PaceCalcNoInt);
+            $("#DistTypeNoInt").on("change", PaceCalcNoInt);
+            $("#PaceTypeNoInt").on("change", PaceCalcNoInt);
+            BindCleanTime("#WUDuration", true);
+            BindCleanTime("#CDDuration", true);
+            //HR Zones
+            BindCleanTime("#Z1Duration", true);
+            BindCleanTime("#Z2Duration", true);
+            BindCleanTime("#Z3Duration", true);
+            BindCleanTime("#Z4Duration", true);
+            BindCleanTime("#Z5Duration", true);
+            BindCleanTime("#Z6Duration", true);
+            BindCleanTime("#Z7Duration", true);
+            BindCleanTime("#Z8Duration", true);
+            BindCleanTime("#Z9Duration", true);
+            BindCleanTime("#Z10Duration", true);
+            //Power Zones
+            BindCleanTime("#PW1Duration", true);
+            BindCleanTime("#PW2Duration", true);
+            BindCleanTime("#PW3Duration", true);
+            BindCleanTime("#PW4Duration", true);
+            BindCleanTime("#PW5Duration", true);
+            BindCleanTime("#PW6Duration", true);
+            BindCleanTime("#PW7Duration", true);
+            BindCleanTime("#PW8Duration", true);
+            BindCleanTime("#PW9Duration", true);
+            BindCleanTime("#PW10Duration", true);
+            //Pace Zones
+            BindCleanTime("#Pace1Duration", true);
+            BindCleanTime("#Pace2Duration", true);
+            BindCleanTime("#Pace3Duration", true);
+            BindCleanTime("#Pace4Duration", true);
+            BindCleanTime("#Pace5Duration", true);
+            BindCleanTime("#Pace6Duration", true);
+            BindCleanTime("#Pace7Duration", true);
+            BindCleanTime("#Pace8Duration", true);
+            BindCleanTime("#Pace9Duration", true);
+            BindCleanTime("#Pace10Duration", true); 
+        });
+        jQuery.fn.sort = function () {
+            return this.pushStack([].sort.apply(this, arguments), []);
+        };
+        function SortName(a, b) {
+            if (a.Name == b.Name) return 0;
+            return a.Name > b.Name ? 1 : -1;
+        }
+        function GetRoutesData(Guid) {
+            $.getJSON('/GetLOV.cshtml?Type=activitytyperoutes&Option1=' + Guid, GetRoutesDataCB);
+        }
+        function GetRoutesDataCB(JsonResponse) {
+            if (JsonResponse.Errors.length > 0) {
+                HandleFSJsonError(JsonResponse.Errors);
+                return;
+            }
+            if ($(JsonResponse.Results).length == 0) {
+                HideEquipmentBox("#Routes");
+            }
+            else {
+                LoadRoutesData("#Routes", JsonResponse.Results, RouteDef);
+            }
+        }
+        function LoadRoutesData(ID, Results, Selected) {
+            var Select = $(ID);
+            $("#" + Select.data("na")).fadeOut(100, function () {
+                $("#" + $(ID).data("container")).fadeIn(100);
+            });
+            Select.empty();
+            Select.append(
+                    $('<option/>')
+                        .attr('value', '')
+                        .text('Select Route...'));
+            $.each(Results, function (index, DataItem) {
+                var newOpt = $('<option/>')
+                        .attr('value', DataItem.Key)
+                        .text(DataItem.Name);
+                if (DataItem.Key == Selected) {
+                    newOpt.attr('selected', '');
+                }
+                Select.append(newOpt);
+            });
+            var x = $("#" + $(ID).data("wbox")).find('.w-box-content');
+            x.height("");
+        }
+        function GetZoneInfo(Guid) {
+            $("#PowerZoneTable").hide();
+            $("#PowerZoneSetup").hide();
+            $("#PowerZoneWorking").show();
+            $("#HRZoneTable").hide();
+            $("#HRZoneSetup").hide();
+            $("#HRZoneWorking").show();
+            $("#PaceZoneTable").hide();
+            $("#PaceZoneSetup").hide();
+            $("#PaceZoneWorking").show();
+            $.getJSON('/GetLOV.cshtml?Type=zones&Option1=' + Guid + '&Option2=922e7909-650f-4ac0-8f55-58ccadd167bd', GetZoneInfoCB);
+        }
+        function GetZoneInfoCB(JsonResponse) {
+            if (JsonResponse.Errors.length > 0) {
+                HandleFSJsonError(JsonResponse.Errors);
+                return;
+            }
+            if (JsonResponse.Results.length == 0) {
+                $("#PowerZoneWorking").hide();
+                $("#PowerZoneSetup").show();
+                $("#PowerZoneTable").hide();
+                $("#HRZoneWorking").hide();
+                $("#HRZoneSetup").show();
+                $("#HRZoneTable").hide();
+                $("#PaceZoneWorking").hide();
+                $("#PaceZoneSetup").show();
+                $("#PaceZoneTable").hide();
+                $("#hdnHasHRZones").val('');
+                $("#hdnHasPWZones").val('');
+                $("#hdnHasPaceZones").val('');
+            }
+            else {
+                var DidPower = false;
+                var DidHR = false;
+                $.each(JsonResponse.Results, function (index, DataItem) {
+                    if(DataItem.ZoneType == "W")
+                    {
+                        DidPower = true;
+                        if(DataItem.Zone1Name != null && DataItem.Zone1Name != "") {
+                            $("#PowerZone1Label").text(DataItem.Zone1Name + " (" + DataItem.Zone1Low + " - " + DataItem.Zone1High + " watts)");
+                            $("#PowerZone1Row").show();
+                        } else {
+                            $("#PowerZone1Row").hide();
+                        }
+                        if(DataItem.Zone2Name != null && DataItem.Zone2Name != "") {
+                            $("#PowerZone2Label").text(DataItem.Zone2Name + " (" + DataItem.Zone2Low + " - " + DataItem.Zone2High + " watts)");
+                            $("#PowerZone2Row").show();
+                        } else {
+                            $("#PowerZone2Row").hide();
+                        }
+                        if(DataItem.Zone3Name != null && DataItem.Zone3Name != "") {
+                            $("#PowerZone3Label").text(DataItem.Zone3Name + " (" + DataItem.Zone3Low + " - " + DataItem.Zone3High + " watts)");
+                            $("#PowerZone3Row").show();
+                        } else {
+                            $("#PowerZone3Row").hide();
+                        }
+                        if(DataItem.Zone4Name != null && DataItem.Zone4Name != "") {
+                            $("#PowerZone4Label").text(DataItem.Zone4Name + " (" + DataItem.Zone4Low + " - " + DataItem.Zone4High + " watts)");
+                            $("#PowerZone4Row").show();
+                        } else {
+                            $("#PowerZone4Row").hide();
+                        }
+                        if(DataItem.Zone5Name != null && DataItem.Zone5Name != "") {
+                            $("#PowerZone5Label").text(DataItem.Zone5Name + " (" + DataItem.Zone5Low + " - " + DataItem.Zone5High + " watts)");
+                            $("#PowerZone5Row").show();
+                        } else {
+                            $("#PowerZone5Row").hide();
+                        }
+                        if(DataItem.Zone6Name != null && DataItem.Zone6Name != "") {
+                            $("#PowerZone6Label").text(DataItem.Zone6Name + " (" + DataItem.Zone6Low + " - " + DataItem.Zone6High + " watts)");
+                            $("#PowerZone6Row").show();
+                        } else {
+                            $("#PowerZone6Row").hide();
+                        }
+                        if(DataItem.Zone7Name != null && DataItem.Zone7Name != "") {
+                            $("#PowerZone7Label").text(DataItem.Zone7Name + " (" + DataItem.Zone7Low + " - " + DataItem.Zone7High + " watts)");
+                            $("#PowerZone7Row").show();
+                        } else {
+                            $("#PowerZone7Row").hide();
+                        }
+                        if(DataItem.Zone8Name != null && DataItem.Zone8Name != "") {
+                            $("#PowerZone8Label").text(DataItem.Zone8Name + " (" + DataItem.Zone8Low + " - " + DataItem.Zone8High + " watts)");
+                            $("#PowerZone8Row").show();
+                        } else {
+                            $("#PowerZone8Row").hide();
+                        }
+                        if(DataItem.Zone9Name != null && DataItem.Zone9Name != "") {
+                            $("#PowerZone9Label").text(DataItem.Zone9Name + " (" + DataItem.Zone9Low + " - " + DataItem.Zone9High + " watts)");
+                            $("#PowerZone9Row").show();
+                        } else {
+                            $("#PowerZone9Row").hide();
+                        }
+                        if(DataItem.Zone10Name != null && DataItem.Zone10Name != "") {
+                            $("#PowerZone10Label").text(DataItem.Zone10Name + " (" + DataItem.Zone10Low + " - " + DataItem.Zone10High + " watts)");
+                            $("#PowerZone10Row").show();
+                        } else {
+                            $("#PowerZone10Row").hide();
+                        }
+                        $("#PowerZoneWorking").hide();
+                        $("#PowerZoneSetup").hide();
+                        $("#PowerZoneTable").show();
+                        if($("#PowerZoneContent").data("LastAction") == "Showing") {
+                            $("#PowerZoneContent").slideToggle(25, "easeOutCubic", function () {$(this).slideToggle(25, "easeOutCubic");});
+                        }
+                        $("#hdnHasPWZones").val('1');
+                    }
+                    if(DataItem.ZoneType == "H")
+                    {
+                        DidHR = true;
+                        if(DataItem.Zone1Name != null && DataItem.Zone1Name != "") {
+                            $("#HRZone1Label").text(DataItem.Zone1Name + " (" + DataItem.Zone1Low + " - " + DataItem.Zone1High + " bpm)");
+                            $("#HRZone1Row").show();
+                        } else {
+                            $("#HRZone1Row").hide();
+                        }
+                        if(DataItem.Zone2Name != null && DataItem.Zone2Name != "") {
+                            $("#HRZone2Label").text(DataItem.Zone2Name + " (" + DataItem.Zone2Low + " - " + DataItem.Zone2High + " bpm)");
+                            $("#HRZone2Row").show();
+                        } else {
+                            $("#HRZone2Row").hide();
+                        }
+                        if(DataItem.Zone3Name != null && DataItem.Zone3Name != "") {
+                            $("#HRZone3Label").text(DataItem.Zone3Name + " (" + DataItem.Zone3Low + " - " + DataItem.Zone3High + " bpm)");
+                            $("#HRZone3Row").show();
+                        } else {
+                            $("#HRZone3Row").hide();
+                        }
+                        if(DataItem.Zone4Name != null && DataItem.Zone4Name != "") {
+                            $("#HRZone4Label").text(DataItem.Zone4Name + " (" + DataItem.Zone4Low + " - " + DataItem.Zone4High + " bpm)");
+                            $("#HRZone4Row").show();
+                        } else {
+                            $("#HRZone4Row").hide();
+                        }
+                        if(DataItem.Zone5Name != null && DataItem.Zone5Name != "") {
+                            $("#HRZone5Label").text(DataItem.Zone5Name + " (" + DataItem.Zone5Low + " - " + DataItem.Zone5High + " bpm)");
+                            $("#HRZone5Row").show();
+                        } else {
+                            $("#HRZone5Row").hide();
+                        }
+                        if(DataItem.Zone6Name != null && DataItem.Zone6Name != "") {
+                            $("#HRZone6Label").text(DataItem.Zone6Name + " (" + DataItem.Zone6Low + " - " + DataItem.Zone6High + " bpm)");
+                            $("#HRZone6Row").show();
+                        } else {
+                            $("#HRZone6Row").hide();
+                        }
+                        if(DataItem.Zone7Name != null && DataItem.Zone7Name != "") {
+                            $("#HRZone7Label").text(DataItem.Zone7Name + " (" + DataItem.Zone7Low + " - " + DataItem.Zone7High + " bpm)");
+                            $("#HRZone7Row").show();
+                        } else {
+                            $("#HRZone7Row").hide();
+                        }
+                        if(DataItem.Zone8Name != null && DataItem.Zone8Name != "") {
+                            $("#HRZone8Label").text(DataItem.Zone8Name + " (" + DataItem.Zone8Low + " - " + DataItem.Zone8High + " bpm)");
+                            $("#HRZone8Row").show();
+                        } else {
+                            $("#HRZone8Row").hide();
+                        }
+                        if(DataItem.Zone9Name != null && DataItem.Zone9Name != "") {
+                            $("#HRZone9Label").text(DataItem.Zone9Name + " (" + DataItem.Zone9Low + " - " + DataItem.Zone9High + " bpm)");
+                            $("#HRZone9Row").show();
+                        } else {
+                            $("#HRZone9Row").hide();
+                        }
+                        if(DataItem.Zone10Name != null && DataItem.Zone10Name != "") {
+                            $("#HRZone10Label").text(DataItem.Zone10Name + " (" + DataItem.Zone10Low + " - " + DataItem.Zone10High + " bpm)");
+                            $("#HRZone10Row").show();
+                        } else {
+                            $("#HRZone10Row").hide();
+                        }
+                        $("#HRZoneWorking").hide();
+                        $("#HRZoneSetup").hide();
+                        $("#HRZoneTable").show();
+                        if($("#HRZoneContent").data("LastAction") == "Showing") {
+                            $("#HRZoneContent").slideToggle(25, "easeOutCubic", function () {$(this).slideToggle(25, "easeOutCubic");});
+                        }
+                        $("#hdnHasHRZones").val('1');
+                    }
+                    if(DataItem.ZoneType == "P")
+                    {
+                        DidPace = true;
+                        if(DataItem.Zone1Name != null && DataItem.Zone1Name != "") {
+                            $("#PaceZone1Label").text(DataItem.Zone1Name + " (" + DataItem.Zone1LowFormatted + " - " + DataItem.Zone1HighFormatted + " " + DataItem.WriteAmountType + ")");
+                            $("#PaceZone1Row").show();
+                        } else {
+                            $("#PaceZone1Row").hide();
+                        }
+                        if(DataItem.Zone2Name != null && DataItem.Zone2Name != "") {
+                            $("#PaceZone2Label").text(DataItem.Zone2Name + " (" + DataItem.Zone2LowFormatted + " - " + DataItem.Zone2HighFormatted + " " + DataItem.WriteAmountType + ")");
+                            $("#PaceZone2Row").show();
+                        } else {
+                            $("#PaceZone2Row").hide();
+                        }
+                        if(DataItem.Zone3Name != null && DataItem.Zone3Name != "") {
+                            $("#PaceZone3Label").text(DataItem.Zone3Name + " (" + DataItem.Zone3LowFormatted + " - " + DataItem.Zone3HighFormatted + " " + DataItem.WriteAmountType + ")");
+                            $("#PaceZone3Row").show();
+                        } else {
+                            $("#PaceZone3Row").hide();
+                        }
+                        if(DataItem.Zone4Name != null && DataItem.Zone4Name != "") {
+                            $("#PaceZone4Label").text(DataItem.Zone4Name + " (" + DataItem.Zone4LowFormatted + " - " + DataItem.Zone4HighFormatted + " " + DataItem.WriteAmountType + ")");
+                            $("#PaceZone4Row").show();
+                        } else {
+                            $("#PaceZone4Row").hide();
+                        }
+                        if(DataItem.Zone5Name != null && DataItem.Zone5Name != "") {
+                            $("#PaceZone5Label").text(DataItem.Zone5Name + " (" + DataItem.Zone5LowFormatted + " - " + DataItem.Zone5HighFormatted + " " + DataItem.WriteAmountType + ")");
+                            $("#PaceZone5Row").show();
+                        } else {
+                            $("#PaceZone5Row").hide();
+                        }
+                        if(DataItem.Zone6Name != null && DataItem.Zone6Name != "") {
+                            $("#PaceZone6Label").text(DataItem.Zone6Name + " (" + DataItem.Zone6LowFormatted + " - " + DataItem.Zone6HighFormatted + " " + DataItem.WriteAmountType + ")");
+                            $("#PaceZone6Row").show();
+                        } else {
+                            $("#PaceZone6Row").hide();
+                        }
+                        if(DataItem.Zone7Name != null && DataItem.Zone7Name != "") {
+                            $("#PaceZone7Label").text(DataItem.Zone7Name + " (" + DataItem.Zone7LowFormatted + " - " + DataItem.Zone7HighFormatted + " " + DataItem.WriteAmountType + ")");
+                            $("#PaceZone7Row").show();
+                        } else {
+                            $("#PaceZone7Row").hide();
+                        }
+                        if(DataItem.Zone8Name != null && DataItem.Zone8Name != "") {
+                            $("#PaceZone8Label").text(DataItem.Zone8Name + " (" + DataItem.Zone8LowFormatted + " - " + DataItem.Zone8HighFormatted + " " + DataItem.WriteAmountType + ")");
+                            $("#PaceZone8Row").show();
+                        } else {
+                            $("#PaceZone8Row").hide();
+                        }
+                        if(DataItem.Zone9Name != null && DataItem.Zone9Name != "") {
+                            $("#PaceZone9Label").text(DataItem.Zone9Name + " (" + DataItem.Zone9LowFormatted + " - " + DataItem.Zone9HighFormatted + " " + DataItem.WriteAmountType + ")");
+                            $("#PaceZone9Row").show();
+                        } else {
+                            $("#PaceZone9Row").hide();
+                        }
+                        if(DataItem.Zone10Name != null && DataItem.Zone10Name != "") {
+                            $("#PaceZone10Label").text(DataItem.Zone10Name + " (" + DataItem.Zone10LowFormatted + " - " + DataItem.Zone10HighFormatted + " " + DataItem.WriteAmountType + ")");
+                            $("#PaceZone10Row").show();
+                        } else {
+                            $("#PaceZone10Row").hide();
+                        }
+                        $("#PaceZoneWorking").hide();
+                        $("#PaceZoneSetup").hide();
+                        $("#PaceZoneTable").show();
+                        if ($("#PaceZoneContent").data("LastAction") == "Showing") {
+                            $("#PaceZoneContent").slideToggle(25, "easeOutCubic", function () { $(this).slideToggle(25, "easeOutCubic"); });
+                        }
+                        $("#hdnHasPaceZones").val('1');
+                    }
+                });
+                if(!DidPower) { 
+                    $("#PowerZoneWorking").hide();
+                    $("#PowerZoneSetup").show();
+                    $("#PowerZoneTable").hide();
+                    $("#hdnHasPWZones").val('');
+                }
+                if(!DidHR) { 
+                    $("#HRZoneWorking").hide();
+                    $("#HRZoneSetup").show();
+                    $("#HRZoneTable").hide();
+                    $("#hdnHasHRZones").val('');
+                }
+                if(!DidPace) { 
+                    $("#PaceZoneWorking").hide();
+                    $("#PaceZoneSetup").show();
+                    $("#PaceZoneTable").hide();
+                    $("#hdnHasPaceZones").val('');
+                }
+            }
+        }
+        function GetEquipmentData(Guid) {
+            $.getJSON('/GetLOV.cshtml?Type=activitytypeequipment&Option1=' + Guid, GetEquipmentDataCB);
+        }
+        function GetEquipmentDataCB(JsonResponse) {
+            if (JsonResponse.Errors.length > 0) {
+                HandleFSJsonError(JsonResponse.Errors);
+                return;
+            }
+            if ($(JsonResponse.Results).length == 0) {
+                HideEquipmentBox("#EquipmentList");
+                HideEquipmentBox("#WUEquipmentList");
+                HideEquipmentBox("#CDEquipmentList");
+            }
+            else {
+                LoadEquipmentData("#EquipmentList", JsonResponse.Results, EquipmentListDef);
+                LoadEquipmentData("#WUEquipmentList", JsonResponse.Results, WUEquipmentListDef);
+                LoadEquipmentData("#CDEquipmentList", JsonResponse.Results, CDEquipmentListDef);
+
+            }
+        }
+        function HideEquipmentBox(ID) {
+            var s = $(ID);
+            s.empty();
+            $("#" + s.data("container")).fadeOut(100, function () {
+                $("#" + $(ID).data("na")).fadeIn(100);
+            });
+            var x = $("#" + $(ID).data("wbox")).find('.w-box-content');
+            x.height("");
+        }
+        function LoadEquipmentData(ID, Results, Selected) {
+            var Select = $(ID);
+            $("#" + Select.data("na")).fadeOut(100, function () {
+                $("#" + $(ID).data("container")).fadeIn(100);
+            });
+            var EquipmentTypeName = Results[0].TypeName;
+            Select.empty();
+            Select.append(
+                    $('<option/>')
+                        .attr('value', '')
+                        .text('Select ' + EquipmentTypeName + '...'));
+            $.each(Results, function (index, DataItem) {
+                var newOpt = $('<option/>')
+                        .attr('value', DataItem.Key)
+                        .text(DataItem.Name + ' (' + DataItem.TotalDistance + ')');
+                if (DataItem.Key == Selected) {
+                    newOpt.attr('selected', '');
+                }
+                Select.append(newOpt);
+            });
+            var prepend = ($("#" + $(ID).data("label")).data("prepend") != undefined) ? $(ID + "Label").data("prepend") : "";
+            var append = ($("#" + $(ID).data("label")).data("append") != undefined) ? $(ID + "Label").data("append") : "";
+            $("#" + $(ID).data("label")).text(prepend + EquipmentTypeName + append);
+            var x = $("#" + $(ID).data("wbox")).find('.w-box-content');
+            x.height("");
+        }
+</script>
+            <script>
+                $(document).ready(function () {
+                    workoutdelete.n_bootbox();
+                });
+
+                workoutdelete = {
+                    n_bootbox: function () {
+                        $("#del-workout").click(function (e) {
+                            e.preventDefault();
+                            bootbox.confirm("Are you sure you want to delete this workout?", function (confirmed) {
+                                if (confirmed) document.location.href = $("#del-workout").attr("href");
+                            });
+                        });
+                    }
+                };
+            </script>
+
+
+        <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44510237-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+    
+<div id="powerTip"></div><a href="javascript:void(0)" class="scrollup" style=""><i class="icon-chevron-up icon-white"></i></a><div class="datepicker dropdown-menu"><div class="datepicker-days" style="display: block;"><table class=" table-condensed"><thead><tr><th class="prev">‹</th><th colspan="5" class="switch">October 2025</th><th class="next">›</th></tr><tr><th class="dow">Su</th><th class="dow">Mo</th><th class="dow">Tu</th><th class="dow">We</th><th class="dow">Th</th><th class="dow">Fr</th><th class="dow">Sa</th></tr></thead><tbody><tr><td class="day  old">28</td><td class="day  old">29</td><td class="day  old">30</td><td class="day ">1</td><td class="day ">2</td><td class="day ">3</td><td class="day  active">4</td></tr><tr><td class="day ">5</td><td class="day ">6</td><td class="day ">7</td><td class="day ">8</td><td class="day ">9</td><td class="day ">10</td><td class="day ">11</td></tr><tr><td class="day ">12</td><td class="day ">13</td><td class="day ">14</td><td class="day ">15</td><td class="day ">16</td><td class="day ">17</td><td class="day ">18</td></tr><tr><td class="day ">19</td><td class="day ">20</td><td class="day ">21</td><td class="day ">22</td><td class="day ">23</td><td class="day ">24</td><td class="day ">25</td></tr><tr><td class="day ">26</td><td class="day ">27</td><td class="day ">28</td><td class="day ">29</td><td class="day ">30</td><td class="day ">31</td><td class="day  new">1</td></tr><tr><td class="day  new">2</td><td class="day  new">3</td><td class="day  new">4</td><td class="day  new">5</td><td class="day  new">6</td><td class="day  new">7</td><td class="day  new">8</td></tr></tbody></table></div><div class="datepicker-months" style="display: none;"><table class="table-condensed"><thead><tr><th class="prev">‹</th><th colspan="5" class="switch">2025</th><th class="next">›</th></tr></thead><tbody><tr><td colspan="7"><span class="month">Jan</span><span class="month">Feb</span><span class="month">Mar</span><span class="month">Apr</span><span class="month">May</span><span class="month">Jun</span><span class="month">Jul</span><span class="month">Aug</span><span class="month">Sep</span><span class="month active">Oct</span><span class="month">Nov</span><span class="month">Dec</span></td></tr></tbody></table></div><div class="datepicker-years" style="display: none;"><table class="table-condensed"><thead><tr><th class="prev">‹</th><th colspan="5" class="switch">2020-2029</th><th class="next">›</th></tr></thead><tbody><tr><td colspan="7"><span class="year old">2019</span><span class="year">2020</span><span class="year">2021</span><span class="year">2022</span><span class="year">2023</span><span class="year">2024</span><span class="year active">2025</span><span class="year">2026</span><span class="year">2027</span><span class="year">2028</span><span class="year">2029</span><span class="year old">2030</span></td></tr></tbody></table></div></div><textarea tabindex="-1" style="position: absolute; inset: -9999px auto auto -9999px; border: 0px; box-sizing: content-box; overflow-wrap: break-word; overflow: hidden; height: 0px !important; min-height: 0px !important; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 400; font-style: normal; letter-spacing: 0px; text-transform: none; word-spacing: 0px; text-indent: 0px; line-height: 20px; width: 100px;" class="autosizejs"></textarea><div class="bootbox modal fade in" style="overflow:hidden;" aria-hidden="false">
+<div class="modal-body">Are you sure you want to delete this workout?</div>
+<div class="modal-footer"><a data-handler="1" class="btn btn-primary" href="javascript:;">OK</a><a data-handler="0" class="btn null" href="javascript:;">Cancel</a></div>
+</div><div class="modal-backdrop fade in"></div></body></html>
