@@ -26,7 +26,7 @@ public class LoginTest extends BaseTest {
 
   @DataProvider(name = "Негативные тестовые данные для логина")
   public Object[][] testDataForLoginTest() {
-    String invalidEmailErrorText = "Please enter a valid email address.";
+    String invalidEmailErrorText = "Please enter a valid email address.1";
     String emptyEmailErrorText = "Please enter your e-mail address.";
     return new Object[][]{
         {"agsrtest", "fdsfssd", invalidEmailErrorText},
