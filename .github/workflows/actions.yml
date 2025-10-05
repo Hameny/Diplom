@@ -90,3 +90,45 @@ jobs:
           publish_dir: target/site/allure-maven-plugin
           # Сохранять предыдущие отчеты
           keep_files: true
+
+      # ДОБАВЛЕНО: Шаг 7 - Автоматический вывод ссылки на Allure отчет
+      - name: Display Allure Report URL
+        if: always()
+        run: |
+          echo "=========================================="
+          echo "📊 ALLURE TEST REPORT"
+          echo "=========================================="
+          echo ""
+          echo "🌐 Отчет доступен по ссылке:"
+          echo "   https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+          echo ""
+          echo "📈 Детальная статистика тестов:"
+          echo "   - Workflow: ${{ github.workflow }}"
+          echo "   - Запуск: ${{ github.run_id }}"
+          echo "   - Ветка: ${{ github.ref_name }}"
+          echo "   - Коммит: ${{ github.sha }}"
+          echo ""
+          echo "🔧 Для просмотра отчета перейдите по ссылке выше."
+          echo "=========================================="
+
+      # ДОБАВЛЕНО: Шаг 8 - Создание summary с ссылкой на отчет
+      - name: Create Summary with Report Link
+        if: always()
+        run: |
+          REPORT_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+          WORKFLOW_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          
+          echo "# 📊 Allure Test Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## 🔗 Ссылки" >> $GITHUB_STEP_SUMMARY
+          echo "- **🌐 Allure отчет:** [$REPORT_URL]($REPORT_URL)" >> $GITHUB_STEP_SUMMARY
+          echo "- **🔧 Workflow:** [$WORKFLOW_URL]($WORKFLOW_URL)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## 📈 Информация о запуске" >> $GITHUB_STEP_SUMMARY
+          echo "- **Репозиторий:** ${{ github.repository }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Ветка:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Коммит:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Набор тестов:** ${{ github.event.inputs.suite || 'smoke' }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "*Отчет сгенерирован автоматически*" >> $GITHUB_STEP_SUMMARY
