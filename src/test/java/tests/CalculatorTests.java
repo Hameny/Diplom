@@ -59,22 +59,4 @@ public class CalculatorTests extends BaseTest {
         .clickCalculateButton();
     assertTrue(calculatorPage.isWorkoutSplitResultDisplayed(),"Результат калькулятора Tinman не отображается");
   }
-
-  @Test(enabled = false, groups = {"smoke"})
-  public void defectTinmanTest() {
-    Calculator intensityCalc = Calculator.builder()
-        .hours("00")
-        .minutes("20")
-        .build();
-    preCondition();
-    dashboardPage.clickCalculatorMenu();
-    calculatorPage.isOpen()
-        .clickTinmanCalculator()
-        .selectTinmanRaceDistance("5 km")
-        .enterIntensityCalculationTime(intensityCalc)
-        .selectGender()
-        .clickCalculateButton();
-    assertEquals(calculatorPage.getIntensityCalculationErrorMessage(),
-        INTENSITY_CALC_ERROR_MESSAGE,"Сообщение об ошибке не совпадает с ожидаемым");
-  }
 }
