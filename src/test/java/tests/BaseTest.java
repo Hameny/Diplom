@@ -69,14 +69,10 @@ public class BaseTest {
         this.bikesPage = new BikesPage();
     }
 
-    @BeforeMethod(onlyForGroups = "LoginWithSuccessLogin", alwaysRun = true)
-    public void preConditionForGroup() {
-        loginPage.login(BASE_LOGIN, BASE_PASSWORD);
-    }
-
-    @BeforeMethod(alwaysRun = true, firstTimeOnly = true)
+    @BeforeMethod(alwaysRun = true)
     public void preCondition() {
         open("/");
+        loginPage.login(BASE_LOGIN, BASE_PASSWORD);
     }
 
     @AfterMethod(onlyForGroups = "shoesDelete", alwaysRun = true)
