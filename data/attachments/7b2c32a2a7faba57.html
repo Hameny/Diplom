@@ -1,0 +1,147 @@
+<html lang="en-US"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <link rel="icon" type="image/ico" href="img/branded/favicon-finalsurge.ico">
+    <title>Final Surge - Login</title>
+    <link rel="stylesheet" href="css/login.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300" rel="stylesheet">
+    <!-- jQuery framework -->
+        <script type="text/javascript" async="" src="https://ssl.google-analytics.com/ga.js"></script><script src="js/jquery.min.js"></script>
+    <!-- validation -->
+        <script src="js/lib/jquery-validation/jquery.validate.js"></script>
+    <script type="text/javascript">
+        (function (a) { a.fn.vAlign = function () { return this.each(function () { var b = a(this).height(), c = a(this).outerHeight(), b = (b + (c - b)) / 2; a(this).css("margin-top", "-" + b + "px"); a(this).css("top", "50%"); a(this).css("position", "absolute") }) } })(jQuery); (function (a) { a.fn.hAlign = function () { return this.each(function () { var b = a(this).width(), c = a(this).outerWidth(), b = (b + (c - b)) / 2; a(this).css("margin-left", "-" + b + "px"); a(this).css("left", "50%"); a(this).css("position", "absolute") }) } })(jQuery);
+        $(document).ready(function () {
+            //if($('#login-position').length) {
+            //    $("#login-position").vAlign().hAlign()
+            //};
+            if ($('#login-validate').length) {
+                $('#login-validate').validate({
+                    //onkeyup: false,
+                    errorClass: 'error',
+                    rules: {
+                        login_name: { required: true, email: true },
+                        login_password: { required: true }
+                    },
+                    messages: {
+                        login_name: {
+                            required: "Please enter your e-mail address.",
+                            email: "Please enter a valid email address."
+                        },
+                        login_password: "Please enter a password."
+                    }
+                })
+            }
+            if ($('#forgot-validate').length) {
+                $('#forgot-validate').validate({
+                    //onkeyup: false,
+                    errorClass: 'error',
+                    rules: {
+                        FEmail: { required: true, email: true }
+                    }
+                })
+            }
+            $('#pass_login').click(function () {
+                $('.panel:visible').slideUp('200', function () {
+                    $('.panel').not($(this)).slideDown('200');
+                });
+                $(this).children('span').toggle();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="login-position">
+    <div id="logo-wrapper">
+        <div class="logo">
+            <a href="https://log.finalsurge.com/"><img src="img/branded/finalsurge.png" class="imgpad"></a>
+        </div>
+    </div>
+    <div id="login-wrapper" class="clearfix">
+        <div class="main-col">
+            <div class="panel" style="">
+                <p class="heading_main formpad">Account Login</p>
+                <form id="login-validate" action="login.cshtml" method="post" novalidate="novalidate">
+                        <input type="hidden" name="SubmitType" value="lg">
+                        <input type="hidden" name="planid" value="">
+                        <input type="hidden" name="partner" value="">
+                        <input type="hidden" name="event" value="">
+                        <input type="hidden" name="plancode" value="">
+                        <input type="hidden" name="membercode" value="">
+                        <input type="hidden" name="coach" value="">
+                        <input type="hidden" name="page_redirect" value="/Calendar.cshtml">
+                        <input type="hidden" name="oauth_redirect" value="">
+                        <input type="hidden" name="k" value="">
+                        <input type="hidden" name="mc" value="">
+                        <input type="hidden" name="en" value="">
+                        <input type="hidden" name="lhr" value="">
+                        <div class="formpad">
+                            <label for="login_name">Email</label>
+                    <input type="text" id="login_name" name="login_name" value="">
+                    <label for="login_password">Password</label>
+                    <input type="password" id="login_password" name="login_password" value="" autocomplete="off">
+                            <label for="login_remember" class="checkbox">
+                                <input type="checkbox" id="login_remember" name="login_remember" value="1">
+                                Remember me</label>
+                        </div>
+                    <div class="submit_sect">
+                        <button type="submit" class="btn btn-beoro-1">Login</button>
+                    </div>
+                    <div class="signup">
+                        <a href="register.cshtml?page_redirect=%2fCalendar.cshtml"><strong>Not registered?</strong> Sign up here for free!</a>
+                    </div>
+                </form>
+            </div>
+                <div class="panel" style="display:none">
+                <p class="heading_main formpad">Can't sign in?</p>
+                    <form id="forgot-validate" action="login.cshtml" method="post" novalidate="novalidate">
+                        <input type="hidden" name="SubmitType" value="fp">
+                        <input type="hidden" name="planid" value="">
+                        <input type="hidden" name="partner" value="">
+                        <input type="hidden" name="event" value="">
+                        <input type="hidden" name="plancode" value="">
+                        <input type="hidden" name="membercode" value="">
+                        <input type="hidden" name="coach" value="">
+                        <input type="hidden" name="page_redirect" value="/Calendar.cshtml">
+                        <input type="hidden" name="oauth_redirect" value="">
+                        <input type="hidden" name="k" value="">
+                        <input type="hidden" name="mc" value="">
+                        <input type="hidden" name="en" value="">
+                        <input type="hidden" name="lhr" value="">
+                        <div class="formpad">
+                            <label for="FEmail">Your email address</label>
+                            <input type="text" id="FEmail" name="FEmail" value="">
+                        </div>
+                    <div class="submit_sect">
+                        <button type="submit" class="btn btn-beoro-1">Request New Password</button>
+                    </div>
+                    <div class="signup">
+                        <a href="register.cshtml?page_redirect=%2fCalendar.cshtml"><strong>Not registered?</strong> Sign up here for free!</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="login_links">
+            <a href="javascript:void(0)" id="pass_login"><span style="">Forgot password?</span><span style="display:none">Account login</span></a>
+        </div>  
+        <div class="bottom">&nbsp;</div>
+        
+
+    </div>
+    </div>
+
+        <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-44510237-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
+
+</body></html>
