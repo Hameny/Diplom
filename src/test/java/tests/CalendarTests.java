@@ -141,7 +141,7 @@ public class CalendarTests extends BaseTest {
         "Информация не совпадает");
   }
 
-  @Test(groups = {"regression", "smoke"})
+  @Test(groups = {"regression"})
   public void fileUploadTest() {
     preCondition();
     calendarPage.isOpen()

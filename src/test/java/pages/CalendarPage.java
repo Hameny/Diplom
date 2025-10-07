@@ -18,7 +18,9 @@ import org.openqa.selenium.By;
 @Log4j2
 public class CalendarPage{
 
+
   private static final String QUICK_ADD_TOGGLE_SELECTOR = "#QuickAddToggle";
+  private static final By LOGO = By.xpath("//img[contains(@src, 'finalsurge_logo.png')]");
   private static final By TODAY_DAY_LOCATOR = By.cssSelector("[class*='fc-today']");
   private static final String PLUS_ICON_SELECTOR = ".icon-plus";
   private static final String QUICK_ADD_LINK_SELECTOR = "a.quick-add";
@@ -45,8 +47,7 @@ public class CalendarPage{
   @Step("Page is open")
   public CalendarPage isOpen() {
     log.info("Page is open");
-    open("/Calendar.cshtml");
-    $(QUICK_ADD_TOGGLE_SELECTOR).shouldBe(clickable);
+    $(LOGO).isDisplayed();
     return this;
   }
 
