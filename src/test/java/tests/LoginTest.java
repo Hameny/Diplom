@@ -11,7 +11,7 @@ public class LoginTest extends BaseTest {
   @Test(groups = {"regression", "smoke"})
   public void positiveLoginTest() {
     preCondition();
-    dashboardPage.isOpen();
+    calendarPage.isOpen();
   }
 
   @Test(groups = {"regression", "smoke"}, dataProvider = "Негативные тестовые данные для логина")

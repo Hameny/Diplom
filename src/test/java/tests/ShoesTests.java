@@ -65,6 +65,7 @@ public class ShoesTests extends BaseTest {
   @Test(groups = {"regression", "smoke"})
   public void negativeAddShoesTest() {
     preCondition();
+
     calendarPage.isOpen();
     shoesPage.navigateToShoesPage()
         .isOpen()

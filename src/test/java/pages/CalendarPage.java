@@ -2,6 +2,7 @@ package pages;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.switchTo;
 
 import com.codeborne.selenide.ElementsCollection;
@@ -44,6 +45,7 @@ public class CalendarPage{
   @Step("Page is open")
   public CalendarPage isOpen() {
     log.info("Page is open");
+    open("/Calendar.cshtml");
     $(QUICK_ADD_TOGGLE_SELECTOR).shouldBe(clickable);
     return this;
   }
