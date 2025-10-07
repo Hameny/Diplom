@@ -55,6 +55,10 @@ public final class PropertyReader {
 
     public static String getProperty(String propertyName)
     {
+        String envValue = System.getenv(propertyName);
+        if (envValue != null && !envValue.isEmpty()) {
+            return envValue;
+        }
         return loadProperties().getProperty(propertyName);
     }
 }
